@@ -1,0 +1,88 @@
+import React, { Component } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import Home from '../home/Home';
+import './AppHeader.css';
+
+class AppHeader extends Component {
+    render() {
+        return (
+            <header id= 'header' className="app-header bg-light fixed-top">
+            
+            <nav className="navbar">
+
+            <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+                <div class="row align-items-center">   
+                <a href="/home#hero"> 
+                <div class="col">   
+         
+                  <img src={require("../img/logo1.png")} style={{height:"70px"}} alt=""></img>
+                    </div>         
+            <div>    
+              <h3 class='h2'>TECHNOZAM</h3>
+              </div>
+              </a>
+      </div>
+
+
+
+        {/* <ul class="list-group list-group-horizontal">
+          <a class="nav-link scrollto" href="home#hero">Home</a>
+          <a class="nav-link scrollto" href="home#about">About</a>
+          <a class="nav-link scrollto" href="home#values">Values</a>
+          <a class="nav-link scrollto" href="home#features">Feature</a>
+          <a class="nav-link scrollto" href="home#services">Services</a>
+          <a class="nav-link scrollto" href="home#team">Team</a>
+          <a class="nav-link scrollto" href="home#contact">Contact</a>
+
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </ul> */}
+
+        <div className="app-options">
+                        <nav className="app-nav">
+                                { this.props.authenticated ? (
+                                    <ul>
+                                             <a class="nav-link scrollto" href="home#hero">Home</a>
+                                             <a class="nav-link scrollto" href="home#about">About</a>
+                                             <a class="nav-link scrollto" href="home#values">Values</a>
+                                             <a class="nav-link scrollto" href="home#features">Feature</a>
+                                             <a class="nav-link scrollto" href="home#services">Services</a>
+                                             <a class="nav-link scrollto" href="home#team">Team</a>
+                                             <a class="nav-link scrollto" href="home#contact">Contact</a>
+                                            
+                                            <NavLink to="/profile" class='getstarted'>Profile</NavLink>
+                                        
+                                            <a onClick={this.props.onLogout} class="getstarted" style={{color:"white"}}>Logout</a>
+                                    </ul>
+                                ):(
+                                    // change the links when user login
+                                    <ul>
+                                             <a class="nav-link scrollto" href="home#hero">Home</a>
+                                             <a class="nav-link scrollto" href="home#about">About</a>
+                                             <a class="nav-link scrollto" href="home#values">Values</a>
+                                             <a class="nav-link scrollto" href="home#features">Feature</a>
+                                             <a class="nav-link scrollto" href="home#services">Services</a>
+                                             <a class="nav-link scrollto" href="home#team">Team</a>
+                                             <a class="nav-link scrollto" href="home#contact">Contact</a>
+                                        <li>
+                                            <NavLink to="/login" class='getstarted'>Get Started</NavLink>   
+                                            <i class="bi bi-list mobile-nav-toggle"></i>
+    
+                                        </li>
+                                        {/* <li>
+                                            <NavLink to="/signup">Signup</NavLink>        
+                                        </li> */}
+                                    </ul>
+                                )}
+                        </nav>
+                    </div>
+              </div>
+            </nav>
+
+        </header>
+     
+        )
+    }
+}
+
+export default AppHeader;
