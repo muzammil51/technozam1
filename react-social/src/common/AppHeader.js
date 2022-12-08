@@ -46,8 +46,17 @@ class AppHeader extends Component {
                                              <a class="nav-link scrollto" href="home#about">About</a>
                                              <a class="nav-link scrollto" href="home#values">Values</a>
                                              <a class="nav-link scrollto" href="home#features">Feature</a>
-                                             <a class="nav-link scrollto" href="home#services">Services</a>
-                                             <a class="nav-link scrollto" href="home#team">Team</a>
+                                             <li class="dropdown"><a href="home#services"><span>Services</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="/shortqsnew">Short Question Generator</a></li>
+                  <li><a href="#">MCQs Generator</a></li>
+                  <li><a href="#">Fill-in-Blanks Generator</a></li>
+                  <li><a href="#">True/False Generator</a></li>
+                  <li><a href="#">Matchings Generator</a></li>
+                  <li><a href="#">Notes Generator</a></li>
+
+                </ul>
+              </li>                                             <a class="nav-link scrollto" href="home#team">Team</a>
                                              <a class="nav-link scrollto" href="home#contact">Contact</a>
                                             
                                             <NavLink to="/profile" class='getstarted'>Profile</NavLink>
@@ -61,7 +70,18 @@ class AppHeader extends Component {
                                              <a class="nav-link scrollto" href="home#about">About</a>
                                              <a class="nav-link scrollto" href="home#values">Values</a>
                                              <a class="nav-link scrollto" href="home#features">Feature</a>
-                                             <a class="nav-link scrollto" href="home#services">Services</a>
+                                             <li class="dropdown"><a href="home#services"><span>Services</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="/shortqs">Short Question Generator</a></li>
+                  <li><a href="#">MCQs Generator</a></li>
+                  <li><a href="#">Fill-in-Blanks Generator</a></li>
+                  <li><a href="#">True/False Generator</a></li>
+                  <li><a href="#">Matchings Generator</a></li>
+                  <li><a href="#">Notes Generator</a></li>
+
+                </ul>
+              </li>
+
                                              <a class="nav-link scrollto" href="home#team">Team</a>
                                              <a class="nav-link scrollto" href="home#contact">Contact</a>
                                         <li>

@@ -6,6 +6,8 @@ import {
 import AppHeader from '../common/AppHeader';
 import AppFooter from '../common/AppFooter';
 import Home from '../home/Home';
+import Shortqs from '../home/Shortqs';
+import Shortqsnew from '../home/Shortqsnew';
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
 import Profile from '../user/profile/Profile';
@@ -76,7 +78,12 @@ class App extends Component {
         <br></br>
           <Switch>
             <Route exact path="/" component={Home}></Route>       
-            <Route exact path="/home" component={Home}></Route>          
+            <Route exact path="/home" component={Home}></Route>   
+
+            <Route exact path="/shortqs" component={Shortqs}></Route>   
+            <Route exact path="/shortqsnew" component={Shortqsnew}></Route>    
+ 
+
             <Route exact path="/home#about" component={Home.about}></Route>           
  
     
@@ -96,7 +103,7 @@ class App extends Component {
         </div>
         <Alert stack={{limit: 3}} 
           timeout = {3000}
-          position='top-right' effect='slide' offset={65} />
+          position='top-left' effect='slide' offset={65} />
 
 <div><AppFooter /></div>
       </div>
