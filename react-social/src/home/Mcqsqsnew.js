@@ -3,13 +3,15 @@ import { NavLink, Link} from 'react-router-dom'
 
 import './Home.css';
 
-class Shortqsnew extends Component {
+class Mcqsqsnew extends Component {
+
+    state = {
+        
+    }
     render() {
         return (
           
             <div>
-
-
 
           {/* <!-- ======= Generator Section ======= --> */}
     <section id="gen" class="about">
@@ -19,8 +21,8 @@ class Shortqsnew extends Component {
 
     <div class="d-flex flex-column justify-content-center" data-aos="fade-up" >
     <div class="content">
-              <h3>Short Question Generator</h3>            
-              <p>We offer you to generate short questions based on text using AI technology. You just have to add your content and questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
+              <h3>Multiple Choice Question Generator</h3>            
+              <p>We offer you to generate multiple choice questions based on text using AI technology. You just have to add your content and mcqs will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
               <div class="text-center text-lg-start">
               <div style={{ height:"600px",width:"100px"}}>
           <iframe style={{marginLeft:"140px", height:"550px",width:"1000px"}} src=' https://a342d42f7c089983.gradio.app'></iframe>
@@ -40,4 +42,4 @@ class Shortqsnew extends Component {
     }
 }
 
-export default Shortqsnew;
+export default Mcqsqsnew;

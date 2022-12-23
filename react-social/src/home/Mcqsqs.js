@@ -3,7 +3,7 @@ import { NavLink, Link} from 'react-router-dom'
 
 import './Home.css';
 
-class Shortqs extends Component {
+class Mcqsqs extends Component {
     render() {
         return (
           
@@ -14,7 +14,7 @@ class Shortqs extends Component {
 <div class="container">
   <div class="row">
     <div class="col-lg-6 d-flex flex-column justify-content-center">
-      <h1 data-aos="fade-up">We Offer Automated Short Questions Generation Using AI</h1>
+      <h1 data-aos="fade-up">We Offer Automated Multiple Choice Questions Generation Using AI</h1>
       <h3>We are team called <b><i>"Prime Art"</i></b> making impossible possible by using AI. Systems that think and make teaching interesting and less time taking. Smart technology for a better future. </h3>
       <h2 data-aos="fade-up" data-aos-delay="600">Let our AI handle it. Smarter than Today</h2>
 
@@ -56,7 +56,7 @@ class Shortqs extends Component {
               <h3>What we offer</h3>
               <h2>Adopting the latest AI technology and providing the staff, teachers, and students with the best possible environment to work and learn.</h2>
             
-              <p>We offer you to generate short questions based on text using AI technology. You just have to add your content and questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
+              <p>We offer you to generate multiple choice questions based on text using AI technology. You just have to add your content and mcqs will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
               <div class="text-center text-lg-start">
                 <a href="#" class="btn-read-more d-inline-flex align-items-center">
                   <span>Read More</span>
@@ -82,7 +82,7 @@ class Shortqs extends Component {
 
         <header class="section-header">
           <h2>Features</h2>
-          <p>Short Question Generator Provides</p>
+          <p>Multiple Choice Question Generator Provides</p>
 
         </header>
 
@@ -238,4 +238,4 @@ class Shortqs extends Component {
     }
 }
 
-export default Shortqs;
+export default Mcqsqs;

@@ -278,8 +278,9 @@ class Home extends Component {
             <div class="service-box blue">
               <i class="ri-discuss-line icon"></i>
               <h3>Short Question Generator</h3>
-              <p>Details</p>
-              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              <p>We offer you to generate short questions based on text using AI technology. You just have to add your content and questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
+
+              <a href='/shortqs' class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
 
@@ -287,7 +288,7 @@ class Home extends Component {
             <div class="service-box orange">
               <i class="ri-discuss-line icon"></i>
               <h3>MCQs Generator</h3>
-              <p>Details</p>
+              <p>We offer you to generate MCQs questions based on text using AI technology. You just have to add your content and MCQs will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
               <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
@@ -296,7 +297,7 @@ class Home extends Component {
             <div class="service-box green">
               <i class="ri-discuss-line icon"></i>
               <h3>Fill-in-blank Generator</h3>
-              <p>Details</p>
+              <p>We offer you to generate Fill-in-Blanks questions based on text using AI technology. You just have to add your content and fill-in-blanks questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
               <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
@@ -305,7 +306,7 @@ class Home extends Component {
             <div class="service-box red">
               <i class="ri-discuss-line icon"></i>
               <h3>True/False Generator</h3>
-              <p>Details</p>
+              <p>We offer you to generate True/False questions based on text using AI technology. You just have to add your content and True/False questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
               <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
@@ -314,7 +315,7 @@ class Home extends Component {
             <div class="service-box purple">
               <i class="ri-discuss-line icon"></i>
               <h3>Matchings Generator</h3>
-              <p>Details</p>
+              <p>We offer you to generate Matchings questions based on text using AI technology. You just have to add your content and matchings questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
               <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
@@ -323,7 +324,7 @@ class Home extends Component {
             <div class="service-box pink">
               <i class="ri-discuss-line icon"></i>
               <h3>Notes Generator</h3>
-              <p>Details</p>
+              <p>We offer you to generate Notes based on text using AI technology. You just have to add your content and notes will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
               <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
