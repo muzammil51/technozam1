@@ -49,7 +49,7 @@ class AppHeader extends Component {
                                              <li class="dropdown"><a href="home#services"><span>Services</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="/shortqsnew">Short Question Generator</a></li>
-                  <li><a href="#">MCQs Generator</a></li>
+                  <li><a href="mcqsqsnew">MCQs Generator</a></li>
                   <li><a href="#">Fill-in-Blanks Generator</a></li>
                   <li><a href="#">True/False Generator</a></li>
                   <li><a href="#">Matchings Generator</a></li>
@@ -61,7 +61,7 @@ class AppHeader extends Component {
                                             
                                             <NavLink to="/profile" class='getstarted'>Profile</NavLink>
                                         
-                                            <a onClick={this.props.onLogout} class="getstarted" style={{color:"white"}}>Logout</a>
+                                            <NavLink to="/home" onClick={this.props.onLogout} class="getstarted" style={{color:"white"}}>Logout</NavLink>
                                     </ul>
                                 ):(
                                     // change the links when user login
@@ -73,7 +73,7 @@ class AppHeader extends Component {
                                              <li class="dropdown"><a href="home#services"><span>Services</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="/shortqs">Short Question Generator</a></li>
-                  <li><a href="#">MCQs Generator</a></li>
+                  <li><a href="mcqsqs">MCQs Generator</a></li>
                   <li><a href="#">Fill-in-Blanks Generator</a></li>
                   <li><a href="#">True/False Generator</a></li>
                   <li><a href="#">Matchings Generator</a></li>

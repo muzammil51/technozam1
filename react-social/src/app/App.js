@@ -7,7 +7,11 @@ import AppHeader from '../common/AppHeader';
 import AppFooter from '../common/AppFooter';
 import Home from '../home/Home';
 import Shortqs from '../home/Shortqs';
+import Mcqsqs from '../home/Mcqsqs';
+
 import Shortqsnew from '../home/Shortqsnew';
+import Mcqsqsnew from '../home/Mcqsqsnew';
+
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
 import Profile from '../user/profile/Profile';
@@ -81,9 +85,14 @@ class App extends Component {
             <Route exact path="/home" component={Home}></Route>   
 
             <Route exact path="/shortqs" component={Shortqs}></Route>   
-            <Route exact path="/shortqsnew" component={Shortqsnew}></Route>    
+            <Route exact path="/mcqsqs" component={Mcqsqs}></Route>  
+
+            <Route exact path="/shortqsnew" component={Shortqsnew}></Route>   
+            <Route exact path="/mcqsqsnew" component={Mcqsqsnew}></Route>     
+
  
 
+ 
             <Route exact path="/home#about" component={Home.about}></Route>           
  
     

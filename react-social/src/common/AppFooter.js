@@ -13,12 +13,12 @@ class AppFooter extends Component {
           <div class="col-lg-5 col-md-12">
             <div class = "col-lg-q2 col-10">
               
-            <img src={require("../img/logo1.png")} style={{height:"80px"}} alt=""></img>
+            <img src={require("../img/logo1.png")} style={{height:"70px"}} alt=""></img>
               <a class="nav-link scrollto" href="home#"><h2 class="h2 text-light">TECHNOZAM</h2></a>
             </div>
 
            
-            <h3>We are team called <b><i>"Prime Art"</i></b> making impossible possible by using AI. Systems that think and make teaching interesting and less time taking. Smart technology for a better future. </h3>
+            <h3 class= 'text-secondary'>We are team called <b><i>"Prime Art"</i></b> making impossible possible by using AI. Systems that think and make teaching interesting and less time taking. Smart technology for a better future. </h3>
           </div>
 
           <div class="col-lg-2 col-6 footer-links ">
@@ -51,18 +51,18 @@ class AppFooter extends Component {
 
           <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
             <h4 class="text-light">Contact Us</h4>
-            <p >
-            <p>
+            <p class= 'text-secondary' >
+            <p class= 'text-secondary'>
             Beaconhouse National University<br></br>
               
             13 Km Off Thokar Niazbaig,<br></br>
             Raiwand Rd,Beacon House Society, Lahore, Punjab<br></br>
-              <p>
+              <p class= 'text-secondary'>
               <br></br>
               <strong>Tel:</strong> 0900 78601<br></br>
               <strong>Phone:</strong> +92 12345678
             </p><p></p>
-<p>
+<p class= 'text-secondary'>
               <strong>Email:</strong> info@example.com<br></br>contact@example.com
    </p>           
             </p>
