@@ -19,7 +19,7 @@ class AppHeader extends Component {
                   <img src={require("../img/logo1.png")} style={{height:"70px"}} alt=""></img>
                     </div>         
             <div>    
-              <h3 class='h2'>TECHNOZAM</h3>
+            <h3 class='h2'>Q-TECH</h3>
               </div>
               </a>
       </div>
@@ -50,7 +50,7 @@ class AppHeader extends Component {
                 <ul>
                   <li><a href="/shortqsnew">Short Question Generator</a></li>
                   <li><a href="mcqsqsnew">MCQs Generator</a></li>
-                  <li><a href="#">Fill-in-Blanks Generator</a></li>
+                  <li><a href="/fillblankqsnew">Fill-in-Blanks Generator</a></li>
                   <li><a href="#">True/False Generator</a></li>
                   <li><a href="#">Matchings Generator</a></li>
                   <li><a href="#">Notes Generator</a></li>
@@ -74,7 +74,7 @@ class AppHeader extends Component {
                 <ul>
                   <li><a href="/shortqs">Short Question Generator</a></li>
                   <li><a href="mcqsqs">MCQs Generator</a></li>
-                  <li><a href="#">Fill-in-Blanks Generator</a></li>
+                  <li><a href="/fillblankqs">Fill-in-Blanks Generator</a></li>
                   <li><a href="#">True/False Generator</a></li>
                   <li><a href="#">Matchings Generator</a></li>
                   <li><a href="#">Notes Generator</a></li>
