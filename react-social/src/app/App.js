@@ -6,11 +6,15 @@ import {
 import AppHeader from '../common/AppHeader';
 import AppFooter from '../common/AppFooter';
 import Home from '../home/Home';
+
 import Shortqs from '../home/Shortqs';
 import Mcqsqs from '../home/Mcqsqs';
+import Fillblankqs from '../home/Fillblankqs';
 
 import Shortqsnew from '../home/Shortqsnew';
 import Mcqsqsnew from '../home/Mcqsqsnew';
+import Fillblankqsnew from '../home/Fillblankqsnew';
+
 
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
@@ -85,10 +89,14 @@ class App extends Component {
             <Route exact path="/home" component={Home}></Route>   
 
             <Route exact path="/shortqs" component={Shortqs}></Route>   
-            <Route exact path="/mcqsqs" component={Mcqsqs}></Route>  
+            <Route exact path="/mcqsqs" component={Mcqsqs}></Route> 
+            <Route exact path="/fillblankqs" component={Fillblankqs}></Route>  
+ 
 
             <Route exact path="/shortqsnew" component={Shortqsnew}></Route>   
-            <Route exact path="/mcqsqsnew" component={Mcqsqsnew}></Route>     
+            <Route exact path="/mcqsqsnew" component={Mcqsqsnew}></Route>  
+            <Route exact path="/fillblankqsnew" component={Fillblankqsnew}></Route>     
+   
 
  
 
