@@ -10,10 +10,14 @@ import Home from '../home/Home';
 import Shortqs from '../home/Shortqs';
 import Mcqsqs from '../home/Mcqsqs';
 import Fillblankqs from '../home/Fillblankqs';
+import Truefalseqs from '../home/Truefalseqs';
+
 
 import Shortqsnew from '../home/Shortqsnew';
 import Mcqsqsnew from '../home/Mcqsqsnew';
 import Fillblankqsnew from '../home/Fillblankqsnew';
+import Truefalseqsnew from '../home/Truefalseqsnew';
+
 
 
 import Login from '../user/login/Login';
@@ -51,6 +55,8 @@ class App extends Component {
         authenticated: true,
         loading: false
       });
+
+
     }).catch(error => {
       this.setState({
         loading: false
@@ -64,7 +70,7 @@ class App extends Component {
       authenticated: false,
       currentUser: null
     });
-    Alert.success("You're safely logged out!");
+    Alert.warning("You're safely logged out!");
   }
 
   componentDidMount() {
@@ -79,7 +85,7 @@ class App extends Component {
     return (
       <div className="app">
         <div className="app-top-box">
-          <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout} />
+          <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout} currentUser={this.state.currentUser} />
           <br></br>
         </div>
         <div className="app-body">
@@ -91,21 +97,22 @@ class App extends Component {
             <Route exact path="/shortqs" component={Shortqs}></Route>   
             <Route exact path="/mcqsqs" component={Mcqsqs}></Route> 
             <Route exact path="/fillblankqs" component={Fillblankqs}></Route>  
+            <Route exact path="/truefalseqs" component={Truefalseqs}></Route>  
+
  
 
             <Route exact path="/shortqsnew" component={Shortqsnew}></Route>   
             <Route exact path="/mcqsqsnew" component={Mcqsqsnew}></Route>  
             <Route exact path="/fillblankqsnew" component={Fillblankqsnew}></Route>     
+            <Route exact path="/truefalseqsnew" component={Truefalseqsnew}></Route>     
+
    
-
- 
-
- 
             <Route exact path="/home#about" component={Home.about}></Route>           
  
     
             <PrivateRoute path="/profile" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
               component={Profile}></PrivateRoute>
+
             <Route path="/login"
               render={(props) => <Login authenticated={this.state.authenticated} {...props} />}></Route>
 
@@ -118,7 +125,7 @@ class App extends Component {
           <br></br>
 
         </div>
-        <Alert stack={{limit: 3}} 
+        <Alert stack={{limit: 1}} 
           timeout = {3000}
           position='top-left' effect='slide' offset={65} />
 
