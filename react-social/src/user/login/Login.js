@@ -30,7 +30,7 @@ class Login extends Component {
             return <Redirect
                 to={{
                 pathname: "/",
-                state: { from: this.props.location }
+                state: { from: this.props.location}
             }}/>;            
         }
 
@@ -44,7 +44,9 @@ class Login extends Component {
       </div>
 
                 <div className="login-content col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <h1 className="login-title">(Login) Good To See You</h1>
+                    <h1 className="login-title">Good To See You! <h2>Login to continue.</h2> </h1>
+
+                    
                     <SocialLogin />
                     <div className="or-separator">
                         <span className="or-text">OR</span>
