@@ -6,7 +6,7 @@ import Home from "../home/Home";
 import Login from "../user/login/Login";
 import Signup from "../user/signup/Signup";
 
-test("render Home component",() => {
+test("render Login component",() => {
     
     render(<BrowserRouter>
     <Home />
@@ -17,7 +17,7 @@ test("render Home component",() => {
     expect(textele).toHaveLength(1)
 });
 
-test("render Signup component",() => {
+test("render Login component",() => {
     
     render(<BrowserRouter>
     <Signup />
@@ -27,7 +27,7 @@ test("render Signup component",() => {
     expect(textele).toHaveLength(1)
 });
 
-test("render Signup component",() => {
+test("render Login component",() => {
     
     render(<BrowserRouter>
     <Signup />
