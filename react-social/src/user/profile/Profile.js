@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './Profile.css';
 
+
 class Profile extends Component {
+  
     constructor(props) {
         super(props);
         console.log(props);
@@ -10,7 +12,7 @@ class Profile extends Component {
         return (
 
             <div>
-                <br></br>
+                <div style={{height:50}}></div>
                 <div className="container">
                     <div className="profile-info">
                         <div className="profile-avatar">
@@ -75,7 +77,7 @@ class Profile extends Component {
                 <p class="mb-0">Qualification</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">B.S Software Engineer</p>
+                <p class="text-muted mb-0"></p>
               </div>
             </div>
             <hr></hr>
@@ -93,7 +95,7 @@ class Profile extends Component {
                 <p class="mb-0">Phone</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">(097) 234-5678</p>
+                <p class="text-muted mb-0"></p>
               </div>
             </div>
             <hr></hr>
@@ -102,7 +104,7 @@ class Profile extends Component {
                 <p class="mb-0">Mobile</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">(098) 765-4321</p>
+                <p class="text-muted mb-0"></p>
               </div>
             </div>
             <hr></hr>
@@ -111,7 +113,7 @@ class Profile extends Component {
                 <p class="mb-0">Address</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">Beaconhouse National University</p>
+                <p class="text-muted mb-0"></p>
               </div>
             </div>
             <hr></hr>
@@ -154,14 +156,79 @@ class Profile extends Component {
             
             </div>
 
-            
-            <div>
-        <div style={{ height:"600px",width:"1000px"}}>
-          <iframe style={{marginLeft:"250px", height:"550px",width:"800px"}} src='https://89f7a59bb8740e5c.gradio.app
-'></iframe>
-        {/* <p><a href="https://0886720f69ba3b7d.gradio.app" target="myFrame">Generate Short Questions</a></p>      */}
-           </div> 
-            </div>
+   {/* <!-- ======= Services Section ======= --> */}
+   <section id="services" class="services">
+
+<div class="container" data-aos="fade-up">
+
+  <header class="section-header">
+    <h2>Services</h2>
+    <p>Services that we provide</p>
+  </header>
+
+  <div class="row gy-4">
+
+    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+      <div class="service-box blue">
+        <i class="ri-discuss-line icon"></i>
+        <h3>Short Question Generator</h3>
+        <p>We offer you to generate short questions based on text using AI technology. You just have to add your content and questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
+
+        <a href='shortqsnew#gen' class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+      <div class="service-box orange">
+        <i class="ri-discuss-line icon"></i>
+        <h3>MCQs Generator</h3>
+        <p>We offer you to generate MCQs questions based on text using AI technology. You just have to add your content and MCQs will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
+        <a href="mcqsqsnew#gen" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+      <div class="service-box green">
+        <i class="ri-discuss-line icon"></i>
+        <h3>Fill-in-blank Generator</h3>
+        <p>We offer you to generate Fill-in-Blanks questions based on text using AI technology. You just have to add your content and fill-in-blanks questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
+        <a href="fillblankqsnew#gen" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+      <div class="service-box red">
+        <i class="ri-discuss-line icon"></i>
+        <h3>True/False Generator</h3>
+        <p>We offer you to generate True/False questions based on text using AI technology. You just have to add your content and True/False questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
+        <a href="truefalseqsnew#gen" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+      <div class="service-box purple">
+        <i class="ri-discuss-line icon"></i>
+        <h3>Matchings Generator</h3>
+        <p>We offer you to generate Matchings questions based on text using AI technology. You just have to add your content and matchings questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
+        <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
+      <div class="service-box pink">
+        <i class="ri-discuss-line icon"></i>
+        <h3>Notes Generator</h3>
+        <p>We offer you to generate Notes based on text using AI technology. You just have to add your content and notes will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
+        <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+{/* <!-- End Services Section --> */}
 
  
 
