@@ -28,7 +28,7 @@ class Signup extends Component {
       </div>
 
                 <div className="signup-content col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <h1 className="signup-title">(SignUp) Welcome To TECHNOZAM</h1>
+                    <h1 className="signup-title">Welcome To Q-Tech <h2>Signup to create an account.</h2></h1>
                     <SocialSignup />
                     <div className="or-separator">
                         <span className="or-text">OR</span>
