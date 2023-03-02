@@ -22,7 +22,7 @@ class Home extends Component {
 
        { this.props.authenticated ? ( 
         <ul>
-         <NavLink class="getstarted btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+         <NavLink to="/profile" class="getstarted btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
          Get
        </NavLink>
        </ul>
@@ -263,6 +263,7 @@ class Home extends Component {
          {/* End of feature section */}
 
          {/* <!-- ======= Services Section ======= --> */}
+         
     <section id="services" class="services">
 
       <div class="container" data-aos="fade-up">
@@ -307,7 +308,7 @@ class Home extends Component {
               <i class="ri-discuss-line icon"></i>
               <h3>True/False Generator</h3>
               <p>We offer you to generate True/False questions based on text using AI technology. You just have to add your content and True/False questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
-              <a href="truefalseqs" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              <a href="/truefalseqs" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
 
@@ -316,7 +317,7 @@ class Home extends Component {
               <i class="ri-discuss-line icon"></i>
               <h3>Matchings Generator</h3>
               <p>We offer you to generate Matchings questions based on text using AI technology. You just have to add your content and matchings questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
-              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              <a href="/matchingqs" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
 
@@ -325,7 +326,7 @@ class Home extends Component {
               <i class="ri-discuss-line icon"></i>
               <h3>Notes Generator</h3>
               <p>We offer you to generate Notes based on text using AI technology. You just have to add your content and notes will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
-              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              <a href="/notesqs" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
 
