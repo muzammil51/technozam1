@@ -49,8 +49,8 @@ class AppHeader extends Component {
                                              <a class="nav-link scrollto" href="mcqsqsnew">Multiple Choice Questions</a>
                                              <a class="nav-link scrollto" href="fillblankqsnew">Fill-in-Blanks</a>
                                              <a class="nav-link scrollto" href="truefalseqsnew">True/False</a>
-                                             <a class="nav-link scrollto" href="home#features">Matchings</a>
-                                             <a class="nav-link scrollto" href="home#features">Notes</a>
+                                             <a class="nav-link scrollto" href="matchingqsnew">Matchings</a>
+                                             <a class="nav-link scrollto" href="notesqsnew">Notes</a>
 
                 <li class="dropdown"> <a><img style={{ borderRadius: 500 ,width: 40, height: 40 ,marginRight:7}} src={this.props.currentUser.imageUrl}></img>{this.props.currentUser.name}</a>
                 <ul style={{float:'right'}}> 
@@ -74,11 +74,11 @@ class AppHeader extends Component {
                                              <li class="dropdown"><a href="home#services"><span>Services</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="/shortqs">Short Question Generator</a></li>
-                  <li><a href="mcqsqs">MCQs Generator</a></li>
+                  <li><a href="/mcqsqs">MCQs Generator</a></li>
                   <li><a href="/fillblankqs">Fill-in-Blanks Generator</a></li>
                   <li><a href="/truefalseqs">True/False Generator</a></li>
-                  <li><a href="#">Matchings Generator</a></li>
-                  <li><a href="#">Notes Generator</a></li>
+                  <li><a href="/matchingqs">Matchings Generator</a></li>
+                  <li><a href="/notesqs">Notes Generator</a></li>
 
                 </ul>
               </li>
