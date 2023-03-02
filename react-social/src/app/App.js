@@ -11,12 +11,18 @@ import Shortqs from '../home/Shortqs';
 import Mcqsqs from '../home/Mcqsqs';
 import Fillblankqs from '../home/Fillblankqs';
 import Truefalseqs from '../home/Truefalseqs';
+import Matchingqs from '../home/Matchingqs';
+import Notesqs from '../home/Notesqs';
+
+
 
 
 import Shortqsnew from '../home/Shortqsnew';
 import Mcqsqsnew from '../home/Mcqsqsnew';
 import Fillblankqsnew from '../home/Fillblankqsnew';
 import Truefalseqsnew from '../home/Truefalseqsnew';
+import Matchingqsnew from '../home/Matchingqsnew';
+import Notesqsnew from '../home/Notesqsnew';
 
 
 
@@ -97,14 +103,20 @@ class App extends Component {
             <Route exact path="/shortqs" component={Shortqs}></Route>   
             <Route exact path="/mcqsqs" component={Mcqsqs}></Route> 
             <Route exact path="/fillblankqs" component={Fillblankqs}></Route>  
-            <Route exact path="/truefalseqs" component={Truefalseqs}></Route>  
+            <Route exact path="/truefalseqs" component={Truefalseqs}></Route> 
+            <Route exact path="/matchingqs" component={Matchingqs}></Route>  
+            <Route exact path="/notesqs" component={Notesqs}></Route>  
 
  
 
             <Route exact path="/shortqsnew" component={Shortqsnew}></Route>   
             <Route exact path="/mcqsqsnew" component={Mcqsqsnew}></Route>  
             <Route exact path="/fillblankqsnew" component={Fillblankqsnew}></Route>     
-            <Route exact path="/truefalseqsnew" component={Truefalseqsnew}></Route>     
+            <Route exact path="/truefalseqsnew" component={Truefalseqsnew}></Route>   
+            <Route exact path="/matchingqsnew" component={Matchingqsnew}></Route> 
+            <Route exact path="/notesqsnew" component={Notesqsnew}></Route>     
+    
+  
 
    
             <Route exact path="/home#about" component={Home.about}></Route>           
@@ -129,7 +141,7 @@ class App extends Component {
           timeout = {3000}
           position='top-left' effect='slide' offset={65} />
 
-<div><AppFooter /></div>
+<div><AppFooter authenticated={this.state.authenticated} onLogout={this.handleLogout} currentUser={this.state.currentUser} /></div>
       </div>
       
     );
