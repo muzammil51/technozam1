@@ -14,14 +14,14 @@ class AppFooter extends Component {
             <div class = "col-lg-q2 col-10">
               
             <img src={require("../img/logo1.png")} style={{height:"70px"}} alt=""></img>
-              <a class="nav-link scrollto" href="home#"><h2 class="h2 text-light">TECHNOZAM</h2></a>
+              <a class="nav-link scrollto" href="home#"><h2 class="h2 text-light">Q-TECH</h2></a>
             </div>
 
            
             <h3 class= 'text-secondary'>We are team called <b><i>"Prime Art"</i></b> making impossible possible by using AI. Systems that think and make teaching interesting and less time taking. Smart technology for a better future. </h3>
           </div>
 
-          <div class="col-lg-2 col-6 footer-links ">
+          <div class="col-lg-2 col-4 footer-links ">
             <h4 class="text-light">Useful Links</h4>
             <ul class="text-light">
             <li><i class="bi bi-chevron-right"></i> <a href="home#hero" >Home</a></li>
@@ -36,17 +36,30 @@ class AppFooter extends Component {
             </ul>
           </div>
 
-          <div class="col-lg-2 col-5 footer-links">
+          <div class="col-2 footer-links">
             <h4 class="text-light">Our Services</h4>
-            <ul class="text-light">
-              <li><i class="bi bi-chevron-right"></i> <a href="#" >Short Question Generator</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">MCQs Generator</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Fill-in-Blanks Generator</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">True/False Generator</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Matchings Generator</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Notes Generator</a></li>
+            { this.props.authenticated ? (
+                                  <ul class="text-light">
+                                      <li><a href="shortqsnew">Short Questions</a></li>
+                                      <li><a href="mcqsqsnew">Multiple Choice Questions</a></li>
+                                      <li><a href="fillblankqsnew">Fill-in-Blanks</a></li>
+                                      <li><a href="truefalseqsnew">True/False</a></li>
+                                      <li><a href="matchingqsnew">Matchings</a></li>
+                                      <li><a href="notesqsnew">Notes</a></li>
+                                    </ul>
+                                ):(
+                                    // change the links when user login
+                <ul class="text-light">
+                  <li><a href="/shortqs">Short Question</a></li>
+                  <li><a href="/mcqsqs">Multiple Choice Questions</a></li>
+                  <li><a href="/fillblankqs">Fill-in-Blanks</a></li>
+                  <li><a href="/truefalseqs">True/False</a></li>
+                  <li><a href="/matchingqs">Matchings</a></li>
+                  <li><a href="/notesqs">Notes</a></li>
 
-            </ul>
+                </ul>
+                                             
+                                )}
           </div>
 
           <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
