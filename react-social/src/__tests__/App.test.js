@@ -3,6 +3,24 @@ import ReactDOM from 'react-dom';
 import App from '../app/App';
 import { Screen } from '@testing-library/react';
 
+it('renders without crashing for routes', () => {
+  const div = document.createElement('Route');
+  ReactDOM.render(<App />, div);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+it('renders without crashing for private routes', () => {
+  const div = document.createElement('PrivateRoute');
+  ReactDOM.render(<App />, div);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+it('renders without crashing for div', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App />, div);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
 it('renders without crashing', () => {
   const div = document.createElement('Route');
   ReactDOM.render(<App />, div);
