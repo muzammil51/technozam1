@@ -36,3 +36,35 @@ test("render Signup component",() => {
     var textele = screen.getAllByRole('link');
     expect(textele).toBeDefined()
 });
+
+
+test("render Home component",() => {
+    
+    render(<BrowserRouter>
+    <Home />
+    </BrowserRouter>);
+
+
+    var textele = screen.getAllByRole('button');
+    expect(textele).toHaveLength(1)
+});
+
+test("render Signup component",() => {
+    
+    render(<BrowserRouter>
+    <Signup />
+    </BrowserRouter>);
+
+    var textele = screen.getAllByRole('button');
+    expect(textele).toHaveLength(1)
+});
+
+test("render Signup component",() => {
+    
+    render(<BrowserRouter>
+    <Signup />
+    </BrowserRouter>);
+
+    var textele = screen.getAllByRole('link');
+    expect(textele).toBeDefined()
+});
