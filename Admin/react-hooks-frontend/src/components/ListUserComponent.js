@@ -6,18 +6,20 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
-
-
 import UserService from '../services/UserService'
+import ReportService from '../services/ReportService'
+
 
 const ListUserComponent = () => {
       
     const [users, setUsers] = useState([])
+    const [reports, setReports] = useState([])
 
 
     useEffect(() => {
 
         getAllUsers();
+        getAllReports();
     }, [])
 
     const getAllUsers = () => {
@@ -37,6 +39,25 @@ const ListUserComponent = () => {
            console.log(error);
        })
         
+    }
+
+    const getAllReports = () => {
+      ReportService.getAllReports().then((response) => {
+        setReports(response.data)
+        console.log(response.data);
+      }).catch(error => {
+        console.log(error);
+      })
+    }
+  
+    const deleteReport = (reportId) => {
+      ReportService.deleteReport(reportId).then((response) => {
+        getAllReports();
+  
+      }).catch(error => {
+        console.log(error);
+      })
+  
     }
 
     return (
@@ -173,7 +194,7 @@ const ListUserComponent = () => {
 
             {/* <!-- Reports --> */}
             <div class="col-12">
-              <div class="card">
+              <div class="card recent-sales overflow-auto">
 
                 <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -193,61 +214,42 @@ const ListUserComponent = () => {
 
                   {/* <!-- Line Chart --> */}
                   <div id="reportsChart"></div>
+                  <table class="table table-border datatable">
+                      <thead>
+                        <tr>
+                          <th scope="col">ID#</th>
+                          <th scope="col">Module</th>
+                          <th scope="col">Reporter Name</th>
+                          <th scope="col">Reporter Email</th>
+                          <th scope="col">Subject</th>
+                          <th scope="col">Actions</th>
+                        </tr>
+                      </thead>
 
-                  {/* <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
-                          name: 'Sales',
-                          data: [31, 40, 28, 51, 42, 82, 56],
-                        }, {
-                          name: 'Revenue',
-                          data: [11, 32, 45, 32, 34, 52, 41]
-                        }, {
-                          name: 'Customers',
-                          data: [15, 11, 32, 18, 9, 24, 11]
-                        }],
-                        chart: {
-                          height: 350,
-                          type: 'area',
-                          toolbar: {
-                            show: false
-                          },
-                        },
-                        markers: {
-                          size: 4
-                        },
-                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                        fill: {
-                          type: "gradient",
-                          gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            opacityTo: 0.4,
-                            stops: [0, 90, 100]
-                          }
-                        },
-                        dataLabels: {
-                          enabled: false
-                        },
-                        stroke: {
-                          curve: 'smooth',
-                          width: 2
-                        },
-                        xaxis: {
-                          type: 'datetime',
-                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                        },
-                        tooltip: {
-                          x: {
-                            format: 'dd/MM/yy HH:mm'
-                          },
+                      <tbody>
+                        {
+                          reports.map(
+                            report =>
+                              <tr key={report.id}>
+
+                                <td> {report.id} </td>
+                                <td>{report.module}</td>
+                                <td> {report.name} </td>
+                                <td> {report.email} </td>
+                                <td>{report.subject}</td>
+                                {/* <td>{report.providerId}</td> */}
+
+
+                                <td>
+                                  <Link style={{ color: "red" }} class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Report" onClick={() => deleteReport(report.id)}>Delete</Link>
+                                  <Link className="bi bi-info-circle-fill" data-bs-toggle="tooltip" data-bs-placement="top" title="View Report" to={`/view-report/${report.id}`} >View Problem</Link>
+
+                                </td>
+                              </tr>
+                          )
                         }
-                      }).render();
-                    });
-                  </script> */}
-                  {/* <!-- End Line Chart --> */}
-
+                      </tbody>
+                    </table>
                 </div>
 
               </div>
