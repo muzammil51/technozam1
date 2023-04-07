@@ -1,9 +1,74 @@
 import React, { Component } from 'react';
 import { NavLink, Link} from 'react-router-dom'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { createContact } from '../util/APIUtils';
+import Alert from 'react-s-alert';
+
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
+
+
 
 import './Home.css';
 
 class Home extends Component {
+
+  
+  constructor(props) {
+    super(props);
+
+  this.state = {
+    // step 2
+    id: this.props.match.params.id,
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  };
+
+  this.changeNameHandler = this.changeNameHandler.bind(this);
+  this.changeEmailHandler = this.changeEmailHandler.bind(this);
+  this.changeSubjectHandler = this.changeSubjectHandler.bind(this);
+  this.changeMessageHandler = this.changeMessageHandler.bind(this);
+
+  this.saveOrUpdateContact = this.saveOrUpdateContact.bind(this);
+
+}
+
+saveOrUpdateContact = (e) => {
+  e.preventDefault();
+  let contactRequest = { name: this.state.name, email: this.state.email, subject: this.state.subject, message: this.state.message };
+  console.log('contact => ' + JSON.stringify(contactRequest));
+
+  // step 5
+    createContact(contactRequest).then(res => {
+      Alert.success("Your message has been sent. Thank You!");
+      this.props.history.push("/home#hero");
+    }).catch(error => {
+      Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+    });
+
+}
+
+changeNameHandler = (event) => {
+  this.setState({ name: event.target.value });
+}
+
+changeEmailHandler = (event) => {
+  this.setState({ email: event.target.value });
+}
+
+changeSubjectHandler = (event) => {
+  this.setState({ subject: event.target.value });
+}
+changeMessageHandler = (event) => { 
+  this.setState({ message: event.target.value});
+}
+
+  componentDidMount() {
+    AOS.init();
+}
     render() {
         return (
           
@@ -15,8 +80,8 @@ class Home extends Component {
   <div class="row">
     <div class="col-lg-6 d-flex flex-column justify-content-center">
       <h1 data-aos="fade-up">We Offer Modern Education Using AI</h1>
-      <h3>We are team called <b><i>"Prime Art"</i></b> making impossible possible by using AI. Systems that think and make teaching interesting and less time taking. Smart technology for a better future. </h3>
-      <h2 data-aos="fade-up" data-aos-delay="600">Let our AI handle it. Smarter than Today</h2>
+      <h3 data-aos="fade-up" data-aos-delay="400">We are team called <b><i>"Prime Art"</i></b> making impossible possible by using AI. Systems that think and make teaching interesting and less time taking. Smart technology for a better future. </h3>
+      <h2 data-aos="fade-up" data-aos-delay="400">Let our AI handle it. Smarter than Today</h2>
 
       <div data-aos="fade-up" data-aos-delay="600">
 
@@ -337,6 +402,58 @@ class Home extends Component {
     </section>
     {/* <!-- End Services Section --> */}
 
+    {/* <!-- ======= Pricing Section ======= --> */}
+    <section id="pricing" class="pricing">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>Pricing</h2>
+          <p>Check our Pricing</p>
+        </header>
+
+        <div class="row gy-4" data-aos="fade-left">
+
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="box">
+              <h3 style={{color: '#07d5c0'}}>Free Plan</h3>
+              <div class="price"><sup>$</sup>0<span> / mo</span></div>
+              <img src={require("../img/pricing-free.png")} class="img-fluid" alt=""></img>
+              <ul>
+                <li>Limited Access</li>
+                <li>Text Input Uploads</li>
+                <li>Save output</li>
+                <li class="na">File Input Uploads</li>
+                <li class="na">Output file save option</li>
+              </ul>
+              <a href="#" class="btn-buy">Buy Now</a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="box">
+              <span class="featured">Featured</span>
+              <h3 style={{color: "#65c600"}}>Starter Plan</h3>
+              <div class="price"><sup>$</sup>10<span> / mo</span></div>
+              <img src={require("../img/pricing-starter.png")} class="img-fluid" alt=""></img>
+
+              <ul>
+              <li>Limited Access</li>
+                <li>Text Input Uploads</li>
+                <li>Save output</li>
+                <li>File Input Uploads</li>
+                <li>Output file save option</li>
+              </ul>
+              <a href="#" class="btn-buy">Buy Now</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+    {/* <!-- End Pricing Section --> */}
 
 
 
@@ -362,8 +479,8 @@ class Home extends Component {
                 <img src={require("../img/boy.png")} class="img-fluid" alt=""></img>
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href="https://www.facebook.com/muzammil.ahmad41/"><i class="bi bi-facebook"></i></a>
+                  <a href="https://www.instagram.com/muzammil__ahmad/"><i class="bi bi-instagram"></i></a>
                   <a href=""><i class="bi bi-linkedin"></i></a>
                 </div>
               </div>
@@ -451,31 +568,27 @@ class Home extends Component {
           </div>
 
           <div class="col-lg-6">
-            <form action="./contact.php" method="post" class="php-email-form">
+            <form  class="php-email-form">
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required></input>
+                <input type="text" name="name" class="form-control" placeholder="Your Name" value={this.state.name} onChange={this.changeNameHandler} required></input>
                 </div>
 
                 <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required></input>
+                <input type="email" class="form-control" name="email" placeholder="Your Email" value={this.state.email} onChange={this.changeEmailHandler} required></input>
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required></input>
+                <input type="text" class="form-control" name="subject" placeholder="Subject" value={this.state.subject} onChange={this.changeSubjectHandler} required></input>
                 </div>
 
                 <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                <textarea rows="6" class="form-control" name="message" placeholder="Message" value={this.state.message} onChange={this.changeMessageHandler} required></textarea>
                 </div>
 
                 <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
+                  <button class="php-email-form" type="submit" onClick={this.saveOrUpdateContact}>Send Message</button>
                 </div>
 
               </div>
