@@ -15,8 +15,6 @@ import Matchingqs from '../home/Matchingqs';
 import Notesqs from '../home/Notesqs';
 
 
-
-
 import Shortqsnew from '../home/Shortqsnew';
 import Mcqsqsnew from '../home/Mcqsqsnew';
 import Fillblankqsnew from '../home/Fillblankqsnew';
@@ -25,20 +23,21 @@ import Matchingqsnew from '../home/Matchingqsnew';
 import Notesqsnew from '../home/Notesqsnew';
 
 
-
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
 import Profile from '../user/profile/Profile';
 import OAuth2RedirectHandler from '../user/oauth2/OAuth2RedirectHandler';
 import NotFound from '../common/NotFound';
 import LoadingIndicator from '../common/LoadingIndicator';
-import { getCurrentUser } from '../util/APIUtils';
+import { getAllUser, getCurrentUser } from '../util/APIUtils';
 import { ACCESS_TOKEN } from '../constants';
 import PrivateRoute from '../common/PrivateRoute';
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import './App.css';
+
+
 
 class App extends Component {
   constructor(props) {
@@ -50,8 +49,10 @@ class App extends Component {
     }
 
     this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(this);
+    this.loadAllUser = this.loadAllUser.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   }
+  
 
   loadCurrentlyLoggedInUser() {
     getCurrentUser()
@@ -70,6 +71,25 @@ class App extends Component {
     });    
   }
 
+  
+  loadAllUser() {
+    getAllUser()
+    .then(response => {
+      this.setState({
+        allUser: response,
+        loading: false
+      });
+
+
+    }).catch(error => {
+      this.setState({
+        loading: false
+      });  
+    });    
+  }
+
+
+
   handleLogout() {
     localStorage.removeItem(ACCESS_TOKEN);
     this.setState({
@@ -81,6 +101,8 @@ class App extends Component {
 
   componentDidMount() {
     this.loadCurrentlyLoggedInUser();
+    this.loadAllUser();
+
   }
 
   render() {
@@ -108,21 +130,24 @@ class App extends Component {
             <Route exact path="/notesqs" component={Notesqs}></Route>  
 
  
+            <PrivateRoute path="/shortqsnew" authenticated={this.state.authenticated} onLogout={this.handleLogout} currentUser={this.state.currentUser} allUser={this.state.allUser}
+            component={Shortqsnew}></PrivateRoute>
+            <PrivateRoute path="/mcqsqsnew" authenticated={this.state.authenticated} onLogout={this.handleLogout} currentUser={this.state.currentUser} allUser={this.state.allUser}
+            component={Mcqsqsnew}></PrivateRoute>  
+            <PrivateRoute path="/fillblankqsnew" authenticated={this.state.authenticated} onLogout={this.handleLogout} currentUser={this.state.currentUser} allUser={this.state.allUser}
+            component={Fillblankqsnew}></PrivateRoute>          
+            <PrivateRoute path="/truefalseqsnew" authenticated={this.state.authenticated} onLogout={this.handleLogout} currentUser={this.state.currentUser} allUser={this.state.allUser}
+            component={Truefalseqsnew}></PrivateRoute>        
+            <PrivateRoute path="/matchingqsnew" authenticated={this.state.authenticated} onLogout={this.handleLogout} currentUser={this.state.currentUser} allUser={this.state.allUser}
+            component={Matchingqsnew}></PrivateRoute>        
+            <PrivateRoute path="/notesqsnew" authenticated={this.state.authenticated} onLogout={this.handleLogout} currentUser={this.state.currentUser} allUser={this.state.allUser}
+            component={Notesqsnew}></PrivateRoute>
+       
 
-            <Route exact path="/shortqsnew" component={Shortqsnew}></Route>   
-            <Route exact path="/mcqsqsnew" component={Mcqsqsnew}></Route>  
-            <Route exact path="/fillblankqsnew" component={Fillblankqsnew}></Route>     
-            <Route exact path="/truefalseqsnew" component={Truefalseqsnew}></Route>   
-            <Route exact path="/matchingqsnew" component={Matchingqsnew}></Route> 
-            <Route exact path="/notesqsnew" component={Notesqsnew}></Route>     
-    
-  
-
-   
             <Route exact path="/home#about" component={Home.about}></Route>           
  
     
-            <PrivateRoute path="/profile" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
+            <PrivateRoute path="/profile" authenticated={this.state.authenticated} onLogout={this.handleLogout} currentUser={this.state.currentUser} allUser={this.state.allUser}
               component={Profile}></PrivateRoute>
 
             <Route path="/login"
@@ -143,6 +168,7 @@ class App extends Component {
 
 <div><AppFooter authenticated={this.state.authenticated} onLogout={this.handleLogout} currentUser={this.state.currentUser} /></div>
       </div>
+      
       
     );
   }
