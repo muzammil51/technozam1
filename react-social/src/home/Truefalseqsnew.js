@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom'
-import { createReport } from '../util/APIUtils';
+import { createReport, getAllTrueText, getTrueTextbyId ,getAllTrueFile,getTrueFilebyId } from '../util/APIUtils';
 import Alert from 'react-s-alert';
-
 
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-import { CsvToHtmlTable } from 'react-csv-to-table';
 import sanitize from 'sanitize-html';
 import Modal from 'react-modal';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
 import './Home.css';
@@ -33,39 +32,81 @@ class Truefalseqsnew extends Component {
   constructor(props) {
     super(props);
     console.log(props)
-
+    
     this.state = {
+
+      // report problem Modal
       modalIsOpen: false,
-      // step 2
+
+      // text history Modal
+      newtextmodalIsOpen: false,
+
+      // file history Modal
+      newfilemodalIsOpen: false,
+
+      // Report problem form values
       id: this.props.match.params.id,
       module:'True/False Module',
-      name: '',
-      email: '',
+      name: this.props.currentUser.name,
+      email: this.props.currentUser.email,
       subject: '',
       problem: '',
+
+            // True Text Array from API
+            truetexts: [],
+            truetext: {},
+      
+            // True File array from API
+            truefiles: [],
+            truefile: {},
     };
 
+    //Report Problem Modal
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
 
+    //True Text Modal
+    this.newtextopenModal = this.newtextopenModal.bind(this);
+    this.newtextafterOpenModal = this.newtextafterOpenModal.bind(this);
+    this.newtextcloseModal = this.newtextcloseModal.bind(this);
+
+    //True file Modal
+    this.newfileopenModal = this.newfileopenModal.bind(this);
+    this.newfileafterOpenModal = this.newfileafterOpenModal.bind(this);
+    this.newfilecloseModal = this.newfilecloseModal.bind(this);
+
+    // Report Problem Form Input change handler
     this.changeNameHandler = this.changeNameHandler.bind(this);
     this.changeEmailHandler = this.changeEmailHandler.bind(this);
     this.changeSubjectHandler = this.changeSubjectHandler.bind(this);
     this.changeProblemHandler = this.changeProblemHandler.bind(this);
 
-    this.saveOrUpdateProblem = this.saveOrUpdateProblem.bind(this);
+        //Save Report Prblem
+        this.saveOrUpdateProblem = this.saveOrUpdateProblem.bind(this);
 
+        // View Text and File from database
+        this.viewText = this.viewText.bind(this);
+        this.viewFile = this.viewFile.bind(this)
   }
 
   componentDidMount() {
     AOS.init();
 
-    this.GetData();
-    this.GetDataFile();
+    // get text values through API
+    getAllTrueText().then((res) => {
+      this.setState({ truetexts: res });
+      // console.log(this.state.truetext.subject)
+    });
 
+    // get File values through API
+    getAllTrueFile().then((res) => {
+      this.setState({ truefiles: res });
+      // console.log(this.state.truefiles)
+    });
   }
 
+// save report problem into database
   saveOrUpdateProblem = (e) => {
     e.preventDefault();
     let reportRequest = { module:this.state.module,name: this.state.name, email: this.state.email, subject: this.state.subject, problem: this.state.problem };
@@ -79,6 +120,30 @@ class Truefalseqsnew extends Component {
 
       this.closeModal
   }
+
+    // view each text id element
+    viewText = (id) => {
+      getTrueTextbyId(id).then(res => {
+        this.newtextopenModal
+        this.setState({
+          truetext: res,
+          newtextmodalIsOpen: true
+        });
+        console.log(res)
+      })
+    }
+  
+    // view each file id element
+    viewFile = (id) => {
+      getTrueFilebyId(id).then(res => {
+        this.newfileopenModal
+        this.setState({
+          truefile: res,
+          newfilemodalIsOpen: true
+        });
+        console.log(res)
+      })
+    }
 
   changeNameHandler = (event) => {
     this.setState({ name: event.target.value });
@@ -107,59 +172,35 @@ class Truefalseqsnew extends Component {
   closeModal() {
     this.setState({ modalIsOpen: false });
   }
+// new text modal
+newtextopenModal() {
+  this.setState({ newtextmodalIsOpen: true });
+}
+
+newtextafterOpenModal() {
+  // references are now sync'd and can be accessed.
+  this.subtitle.style.color = 'white';
+}
+
+newtextcloseModal() {
+  this.setState({ newtextmodalIsOpen: false });
+}
 
 
-  GetData() {
-    this.fetchCsv().then((res) => {
-      // console.log(Papa.parse(res));
-      this.setState({
-        myData: res
-      })
-      console.log(this.state.myData);
-    })
-  }
-  GetDataFile() {
-    this.fetchCsvFile().then((res) => {
-      // console.log(Papa.parse(res));
-      this.setState({
-        newData: res
-      })
-      console.log(this.state.newData);
-    })
-  }
+// new file modal
+newfileopenModal() {
+  this.setState({ newfilemodalIsOpen: true });
+}
 
+newfileafterOpenModal() {
+  // references are now sync'd and can be accessed.
+  this.subtitle.style.color = 'white';
+}
 
-  async fetchCsv() {
-    const response = await fetch('New folder/TrueFalse/file_data/log.csv');
-    const reader = response.body.getReader();
-    const result = await reader.read();
-    const decoder = new TextDecoder('utf-8');
-    const csv = await decoder.decode(result.value);
-    // console.log('csv', sanitize(csv , {
-    //   allowedTags: [],
-    //   allowedAttributes: []
-    // }));
-    return sanitize(csv, {
-      allowedTags: [],
-      allowedAttributes: []
-    });
-  }
+newfilecloseModal() {
+  this.setState({ newfilemodalIsOpen: false });
+}
 
-  async fetchCsvFile() {
-    const response = await fetch('New folder/TrueFalse/file_data/fileupload.csv');
-    const reader = response.body.getReader();
-    const result = await reader.read();
-    const decoder = new TextDecoder('utf-8');
-    const csv = await decoder.decode(result.value);
-    // console.log('csv', sanitize(csv , {
-    //   allowedTags: [],
-    //   allowedAttributes: []
-    // }));
-    return sanitize(csv, {
-      allowedTags: [],
-      allowedAttributes: []
-    });
-  }
   render() {
     return (
 
@@ -197,12 +238,12 @@ class Truefalseqsnew extends Component {
                         <br /><br /><br />
 
                         <div class="col-md-5">
-                          <input type="text" name="name" class="form-control" placeholder="Your Name" value={this.state.name} onChange={this.changeNameHandler} required></input>
+                          <input type="text" name="name" class="form-control" placeholder="Your Name" value={this.props.currentUser.name} onChange={this.changeNameHandler} disabled></input>
                         </div>
                         <br /><br /><br />
 
                         <div class="col-md-6 ">
-                          <input type="email" class="form-control" name="email" placeholder="Your Email" value={this.state.email} onChange={this.changeEmailHandler}  required></input>
+                          <input type="email" class="form-control" name="email" placeholder="Your Email" value={this.props.currentUser.email} onChange={this.changeEmailHandler}  disabled></input>
                         </div>
                         <br /><br /><br />
 
@@ -243,52 +284,200 @@ class Truefalseqsnew extends Component {
 
         </section>
 
-        <p className="text-center bg" style={{ marginTop: '30px', }}>Recent Uploads</p>
+        <section id="pricing" class="pricing">
+
+          <div class="container" data-aos="fade-up">
+
+            <header class="section-header">
+              <p>Recent Uploads History</p>
+            </header>
+
+            <div class="row gy-4" style={{marginLeft:"80px"}} data-aos="fade-left">
+
+{/* Text Recent History */}
+            <div data-aos="zoom-out" data-aos-delay="100">
+                <div class="box">
+
+                  <div>
+                    <div >
+                      <header class="section-header">
+                        <h2>Recent Text Upload History</h2>
+                      </header>
+
+                      <table style={{height:"300px"}} className="table table-borderless table-hover table-responsive">
+
+                        <thead class="thead-dark">
+                          <tr>
+                            <th> ID#</th>
+                            <th> Subject</th>
+                            <th> TimeStamp</th>
+                            <th> Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {
+                            this.state.truetexts.map(
+                              truetext =>
+                                <tr key={truetext.id}>
+                                  <td> {truetext.id} </td>
+                                  <td> {truetext.subject} </td>
+                                  <td> {truetext.timedate} </td>
+                              
+                                  <button style={{ margin: "10px",color:"white"  }} onClick={() => this.viewText(truetext.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More </button>
+
+                                  {/* <td><a href="#" role="button" onClick={this.newopenModal}>See more</a></td> */}
+
+                                  <Modal
+                                    isOpen={this.state.newtextmodalIsOpen}
+                                    onAfterOpen={this.newtextafterOpenModal}
+                                    onRequestClose={this.newtextcloseModal}
+                                    style={customStyles}
+                                  >
+                                    <div class="modal-header">
+                                      <h4 class="h4 modal-title">Report a Problem</h4>
+                                      <button class="close" onClick={this.newtextcloseModal}>&times;</button>
+                                    </div>
 
 
-        <div class='row' style={{ marginTop: '30px' }}>
-          <div class="profile-info col-5" style={{ marginLeft: '20px' }}>
-            <div class="card mb-7">
-              <p>File Uploads</p>
+                                    <div class="modal-body">
+                                      <form>
+                                        <div class="row gy-6">
+
+                                          <div class="col-md-5">
+                                            <h4 style={{ color: "GrayText" }}>Subject:  </h4>
+                                            <b>{this.state.truetext.subject}</b>
+                                          </div>
+
+                                          <div class="col-md-5">
+                                            <h4 style={{ color: "GrayText" }}>Date/Time:</h4>
+                                            <h4 style={{ color: "GrayText" }}>{this.state.truetext.timedate}  </h4>
+                                          </div>
+                                          <br /><br />
+
+                                          <div style={{ width: "100%", display: "flex" }}>
+                                            <div style={{ width: "50%", float: "left", }}>
+
+                                              <h4 style={{ color: "GrayText" }}>Input:</h4>
+                                              <textarea rows="7" class="form-control" value={this.state.truetext.input}></textarea>
+                                            </div>
+
+                                            <div style={{ flex: "1", marginLeft: "2%" }}>
+
+                                              <h4 style={{ color: "GrayText" }}>Output:</h4>
+                                              <textarea rows="7" class="form-control" value={sanitize(this.state.truetext.output, {allowedTags:[] ,allowedAttributes:{}})}></textarea>
+
+                                            </div>
+                                          </div>
+
+                                        </div>
+                                      </form>
+                                    </div>
+
+                                  </Modal>
+                                </tr>
+                            )
+                          }
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+{/* File Recent History */}
+              <div class="col-lg-6" style={{marginLeft:"40px"}} data-aos="zoom-in" data-aos-delay="100">
+                <div class="box">
+                  <div style={{ marginLeft: "10px" }}>
+                    <header class="section-header">
+                      <h2>Recent File Upload History</h2>
+                    </header>                      
+                    <table style={{height:"300px"}} className="table table-borderless table-hover table-responsive">
+
+                      <thead class="thead-dark">
+                        <tr>
+                          <th> ID#</th>
+                          <th> Subject</th>
+                          <th> TimeStamp</th>
+                          <th> Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {
+                          this.state.truefiles.map(
+                            truefile =>
+                              <tr key={truefile.id}>
+                                <td> {truefile.id} </td>
+                                <td> {truefile.subject} </td>
+                                <td> {truefile.timedate} </td>
+                                <button style={{ margin: "10px",color:"white" }} onClick={() => this.viewFile(truefile.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More </button>
+
+                                {/* <td><a href="#" role="button" onClick={this.newopenModal}>See more</a></td> */}
+
+                                <Modal
+                                  isOpen={this.state.newfilemodalIsOpen}
+                                  onAfterOpen={this.newfileafterOpenModal}
+                                  onRequestClose={this.newfilecloseModal}
+                                  style={customStyles}
+                                >
+                                  <div class="modal-header">
+                                    <h4 class="h4 modal-title">Report a Problem</h4>
+                                    <button class="close" onClick={this.newfilecloseModal}>&times;</button>
+                                  </div>
+
+
+                                  <div class="modal-body">
+                                    <form>
+                                      <div class="row gy-6">
+
+                                        <div class="col-md-5">
+                                          <h4 style={{ color: "GrayText" }}>Subject:  </h4>
+                                          <b>{this.state.truefile.subject}</b>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                          <h4 style={{ color: "GrayText" }}>Date/Time:</h4>
+                                          <h4 style={{ color: "GrayText" }}>{this.state.truefile.timedate}  </h4>
+                                        </div>
+                                        <br /><br />
+
+                                        <div style={{ width: "100%", display: "flex" }}>
+                                          <div style={{ width: "50%", float: "left", }}>
+
+                                            <h4 style={{ color: "GrayText" }}>Input:</h4>
+                                            <textarea rows="7" class="form-control" value={this.state.truefile.input}></textarea>
+                                          </div>
+
+                                          <div style={{ flex: "1", marginLeft: "2%" }}>
+
+                                            <h4 style={{ color: "GrayText" }}>Output:</h4>
+                                            <textarea rows="7" class="form-control" value={this.state.truefile.output} ></textarea>
+
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    </form>
+                                  </div>
+
+                                </Modal>
+                              </tr>
+                          )
+                        }
+                      </tbody>
+                    </table>
+
+
+                  </div>
+                </div>
+              </div>
+
+
             </div>
 
-            <div>
-              {
-                (this.state != undefined) ?
-                  <CsvToHtmlTable
-                    data={this.state.myData}
-                    csvDelimiter=","
-                    tableClassName="table table-responsive table-bordered table-hover table-striped table-sm"
-
-                  />
-                  : null
-              }
-
-
-            </div>
           </div>
 
-
-          <div class="profile-info col-6" style={{ marginLeft: "0px" }}>
-            <div class="card mb-7">
-              <p>Text Uploads</p>
-            </div>
-            <div>
-              {
-                (this.state != undefined) ?
-                  <CsvToHtmlTable
-                    data={this.state.newData}
-                    csvDelimiter=","
-                    tableClassName="table table-responsive table-bordered table-hover table-striped table-sm"
-
-                  />
-                  : null
-              }
-
-
-            </div>
-          </div>
-        </div>
+        </section>
 
 
       </div>
