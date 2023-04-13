@@ -6,15 +6,11 @@ import { createContact } from '../util/APIUtils';
 import Alert from 'react-s-alert';
 
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
-
-
-
 import './Home.css';
+
 
 class Home extends Component {
 
-  
   constructor(props) {
     super(props);
 
@@ -73,7 +69,7 @@ changeMessageHandler = (event) => {
         return (
           
             <div>
-              
+
                <section id="hero" class="hero d-flex align-items-center">
 
 <div class="container">
@@ -108,9 +104,8 @@ changeMessageHandler = (event) => {
 
 </section>
 
-
-
-    {/* <!-- ======= About Section ======= --> */}
+      
+      {/* <!-- ======= About Section ======= --> */}
     <section id="about" class="about">
 
       <div class="container" data-aos="fade-up">
