@@ -1,19 +1,19 @@
 import React, { Component, useMemo } from 'react';
 import { NavLink, Link } from 'react-router-dom'
-import { createReport } from '../util/APIUtils';
+import { createReport, getAllFillText, getFillTextbyId, getAllFillFile, getFillFilebyId } from '../util/APIUtils';
 import Alert from 'react-s-alert';
 
 
-import { CsvToHtmlTable } from 'react-csv-to-table';
 import sanitize from 'sanitize-html';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
 import Modal from 'react-modal';
 
 
 const customStyles = {
   content: {
-    color:"blue",
+    color: "blue",
     top: '50%',
     left: '50%',
     right: 'auto',
@@ -32,50 +32,116 @@ class Fillblankqsnew extends Component {
   constructor(props) {
     super(props);
     console.log(props)
+
     this.state = {
+      // report problem Modal
       modalIsOpen: false,
-      // step 2
+
+      // text history Modal
+      newtextmodalIsOpen: false,
+
+      // file history Modal
+      newfilemodalIsOpen: false,
+
+      // Report problem form values
       id: this.props.match.params.id,
-      module:'Fill-in-Blanks Module',
-      name: '',
-      email: '',
+      module: 'Fill-in-Blanks Module',
+      name: this.props.currentUser.name,
+      email: this.props.currentUser.email,
       subject: '',
       problem: '',
+
+      // Fill Text Array from API
+      filltexts: [],
+      filltext: {},
+
+      // Fill File array from API
+      fillfiles: [],
+      fillfile: {},
     };
 
+    //Report Problem Modal
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
 
+    //Fill Text Modal
+    this.newtextopenModal = this.newtextopenModal.bind(this);
+    this.newtextafterOpenModal = this.newtextafterOpenModal.bind(this);
+    this.newtextcloseModal = this.newtextcloseModal.bind(this);
+
+    //Fill file Modal
+    this.newfileopenModal = this.newfileopenModal.bind(this);
+    this.newfileafterOpenModal = this.newfileafterOpenModal.bind(this);
+    this.newfilecloseModal = this.newfilecloseModal.bind(this);
+
+    // Report Problem Form Input change handler
     this.changeNameHandler = this.changeNameHandler.bind(this);
     this.changeEmailHandler = this.changeEmailHandler.bind(this);
     this.changeSubjectHandler = this.changeSubjectHandler.bind(this);
     this.changeProblemHandler = this.changeProblemHandler.bind(this);
 
+    //Save Report Prblem
     this.saveOrUpdateProblem = this.saveOrUpdateProblem.bind(this);
 
+    // View Text and File from database
+    this.viewText = this.viewText.bind(this);
+    this.viewFile = this.viewFile.bind(this)
   }
 
   componentDidMount() {
     AOS.init();
 
-    this.GetData();
-    this.GetDataFile();
+    // get text values through API
+    getAllFillText().then((res) => {
+      this.setState({ filltexts: res });
+      // console.log(this.state.filltext.subject)
+    });
 
+    // get File values through API
+    getAllFillFile().then((res) => {
+      this.setState({ fillfiles: res });
+      // console.log(this.state.fillfiles)
+    });
   }
 
+  // save report problem into database
   saveOrUpdateProblem = (e) => {
     e.preventDefault();
-    let reportRequest = {module:this.state.module, name: this.state.name, email: this.state.email, subject: this.state.subject, problem: this.state.problem };
+    let reportRequest = { module: this.state.module, name: this.state.name, email: this.state.email, subject: this.state.subject, problem: this.state.problem };
     console.log('report => ' + JSON.stringify(reportRequest));
 
     // step 5
-      createReport(reportRequest).then(res => {
-        Alert.success("Your problem has been reported.");
-        this.setState({ modalIsOpen: false });
-      });
+    createReport(reportRequest).then(res => {
+      Alert.success("Your problem has been reported.");
+      this.setState({ modalIsOpen: false });
+    });
 
-      this.closeModal
+    this.closeModal
+  }
+
+  // view each text id element
+  viewText = (id) => {
+    getFillTextbyId(id).then(res => {
+      this.newtextopenModal
+      this.setState({
+        filltext: res,
+        newtextmodalIsOpen: true
+      });
+      console.log(res)
+    })
+  }
+
+  // view each file id element
+  viewFile = (id) => {
+    getFillFilebyId(id).then(res => {
+      this.newfileopenModal
+      this.setState({
+        fillfile: res,
+        newfilemodalIsOpen: true
+      });
+      console.log(res)
+    })
   }
 
   changeNameHandler = (event) => {
@@ -107,57 +173,36 @@ class Fillblankqsnew extends Component {
     this.setState({ modalIsOpen: false });
   }
 
-  GetData() {
-    this.fetchCsv().then((res) => {
-      // console.log(Papa.parse(res));
-      this.setState({
-        myData: res
-      })
-      console.log(this.state.myData);
-    })
+  // new text modal
+  newtextopenModal() {
+    this.setState({ newtextmodalIsOpen: true });
   }
-  GetDataFile() {
-    this.fetchCsvFile().then((res) => {
-      // console.log(Papa.parse(res));
-      this.setState({
-        newData: res
-      })
-      console.log(this.state.newData);
-    })
+
+  newtextafterOpenModal() {
+    // references are now sync'd and can be accessed.
+    this.subtitle.style.color = 'white';
+  }
+
+  newtextcloseModal() {
+    this.setState({ newtextmodalIsOpen: false });
   }
 
 
-  async fetchCsv() {
-    const response = await fetch('New folder/FillinBlanks/file_data/log.csv');
-    const reader = response.body.getReader();
-    const result = await reader.read();
-    const decoder = new TextDecoder('utf-8');
-    const csv = await decoder.decode(result.value);
-    // console.log('csv', sanitize(csv , {
-    //   allowedTags: [],
-    //   allowedAttributes: []
-    // }));
-    return sanitize(csv, {
-      allowedTags: [],
-      allowedAttributes: []
-    });
+  // new file modal
+  newfileopenModal() {
+    this.setState({ newfilemodalIsOpen: true });
   }
 
-  async fetchCsvFile() {
-    const response = await fetch('New folder/FillinBlanks/file_data/fileupload.csv');
-    const reader = response.body.getReader();
-    const result = await reader.read();
-    const decoder = new TextDecoder('utf-8');
-    const csv = await decoder.decode(result.value);
-    // console.log('csv', sanitize(csv , {
-    //   allowedTags: [],
-    //   allowedAttributes: []
-    // }));
-    return sanitize(csv, {
-      allowedTags: [],
-      allowedAttributes: []
-    });
+  newfileafterOpenModal() {
+    // references are now sync'd and can be accessed.
+    this.subtitle.style.color = 'white';
   }
+
+  newfilecloseModal() {
+    this.setState({ newfilemodalIsOpen: false });
+  }
+
+
   render() {
 
     return (
@@ -190,18 +235,18 @@ class Fillblankqsnew extends Component {
                     <form>
                       <div class="row gy-6">
 
-                      <div class="col-md-5">
+                        <div class="col-md-5">
                           <input type="text" name="module" class="form-control" placeholder="Module" value={"Fill-in-Blanks Module"} disabled></input>
                         </div>
                         <br /><br /><br />
 
                         <div class="col-md-5">
-                          <input type="text" name="name" class="form-control" placeholder="Your Name" value={this.state.name} onChange={this.changeNameHandler} required="required"></input>
+                          <input type="text" name="name" class="form-control" placeholder="Your Name" value={this.props.currentUser.name} onChange={this.changeNameHandler} disabled></input>
                         </div>
                         <br /><br /><br />
 
                         <div class="col-md-6 ">
-                          <input type="email" class="form-control" name="email" placeholder="Your Email" value={this.state.email} onChange={this.changeEmailHandler} required></input>
+                          <input type="email" class="form-control" name="email" placeholder="Your Email" value={this.props.currentUser.email} onChange={this.changeEmailHandler} disabled></input>
                         </div>
                         <br /><br /><br />
 
@@ -241,69 +286,199 @@ class Fillblankqsnew extends Component {
 
         </section>
 
+        <section id="pricing" class="pricing">
+
+          <div class="container" data-aos="fade-up">
+
+            <header class="section-header">
+              <p>Recent Uploads History</p>
+            </header>
+
+            <div class="row gy-4" style={{marginLeft:"80px"}} data-aos="fade-left">
+
+{/* Text Recent History */}
+
+            <div data-aos="zoom-out" data-aos-delay="100">
+                <div class="box">
+
+                  <div>
+                    <div >
+                      <header class="section-header">
+                        <h2>Recent Text Upload History</h2>
+                      </header>
+
+                      <table style={{height:"300px"}} className="table table-borderless table-hover table-responsive">
+
+                        <thead class="thead-dark">
+                          <tr>
+                            <th> ID#</th>
+                            <th> Subject</th>
+                            <th> TimeStamp</th>
+                            <th> Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {
+                            this.state.filltexts.map(
+                              filltext =>
+                                <tr key={filltext.id}>
+                                  <td> {filltext.id} </td>
+                                  <td> {filltext.subject} </td>
+                                  <td> {filltext.timedate} </td>
+                                  <button style={{ margin: "10px" ,color:"white" }} onClick={() => this.viewText(filltext.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More</button>
+
+                                  <Modal
+                                    isOpen={this.state.newtextmodalIsOpen}
+                                    onAfterOpen={this.newtextafterOpenModal}
+                                    onRequestClose={this.newtextcloseModal}
+                                    style={customStyles}
+                                  >
+                                    <div class="modal-header">
+                                      <h4 class="h4 modal-title">Report a Problem</h4>
+                                      <button class="close" onClick={this.newtextcloseModal}>&times;</button>
+                                    </div>
 
 
-        <p className="text-center bg" style={{ marginTop: '30px', }}>Recent Uploads</p>
+                                    <div class="modal-body">
+                                      <form>
+                                        <div class="row gy-6">
+
+                                          <div class="col-md-5">
+                                            <h4 style={{ color: "GrayText" }}>Subject:  </h4>
+                                            <b>{this.state.filltext.subject}</b>
+                                          </div>
+
+                                          <div class="col-md-5">
+                                            <h4 style={{ color: "GrayText" }}>Date/Time:</h4>
+                                            <h4 style={{ color: "GrayText" }}>{this.state.filltext.timedate}  </h4>
+                                          </div>
+                                          <br /><br />
+
+                                          <div style={{ width: "100%", display: "flex" }}>
+                                            <div style={{ width: "50%", float: "left", }}>
+
+                                              <h4 style={{ color: "GrayText" }}>Input:</h4>
+                                              <textarea rows="7" class="form-control" value={this.state.filltext.input}></textarea>
+                                            </div>
+
+                                            <div style={{ flex: "1", marginLeft: "2%" }}>
+
+                                              <h4 style={{ color: "GrayText" }}>Output:</h4>
+                                              <textarea rows="7" class="form-control" value={sanitize(this.state.filltext.output, {allowedTags:[] ,allowedAttributes:{}})} ></textarea>
+
+                                            </div>
+                                          </div>
+
+                                        </div>
+                                      </form>
+                                    </div>
+
+                                  </Modal>
+                                </tr>
+                            )
+                          }
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+{/* File Recent History  */}
+
+              <div class="col-lg-6" style={{marginLeft:"40px"}} data-aos="zoom-in" data-aos-delay="100">
+                <div class="box">
+                  <div style={{ marginLeft: "10px" }}>
+                    <header class="section-header">
+                      <h2>Recent File Upload History</h2>
+                    </header>                      
+                    <table style={{height:"300px"}} className="table table-borderless table-hover table-responsive">
+
+                      <thead class="thead-dark">
+                        <tr>
+                          <th> ID#</th>
+                          <th> Subject</th>
+                          <th> TimeStamp</th>
+                          <th> Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody class="table-group-divider">
+                        {
+                          this.state.fillfiles.map(
+                            fillfile =>
+                              <tr key={fillfile.id}>
+                                <td> {fillfile.id} </td>
+                                <td> {fillfile.subject} </td>
+                                <td> {fillfile.timedate} </td>
+                                <button style={{ margin: "10px" ,color:"white"}} onClick={() => this.viewFile(fillfile.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More</button>
+
+                                <Modal
+                                  isOpen={this.state.newfilemodalIsOpen}
+                                  onAfterOpen={this.newfileafterOpenModal}
+                                  onRequestClose={this.newfilecloseModal}
+                                  style={customStyles}
+                                >
+                                  <div class="modal-header">
+                                    <h4 class="h4 modal-title">Report a Problem</h4>
+                                    <button class="close" onClick={this.newfilecloseModal}>&times;</button>
+                                  </div>
 
 
-        <div class='row' style={{ marginTop: '30px' }}>
-          <div class="profile-info col-5" style={{ marginLeft: '20px' }}>
-            <div class="card mb-7">
-              <p>File Uploads</p>
+                                  <div class="modal-body">
+                                    <form>
+                                      <div class="row gy-6">
+
+                                        <div class="col-md-5">
+                                          <h4 style={{ color: "GrayText" }}>Subject:  </h4>
+                                          <b>{this.state.fillfile.subject}</b>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                          <h4 style={{ color: "GrayText" }}>Date/Time:</h4>
+                                          <h4 style={{ color: "GrayText" }}>{this.state.fillfile.timedate}  </h4>
+                                        </div>
+                                        <br /><br />
+
+                                        <div style={{ width: "100%", display: "flex" }}>
+                                          <div style={{ width: "50%", float: "left", }}>
+
+                                            <h4 style={{ color: "GrayText" }}>Input:</h4>
+                                            <textarea rows="7" class="form-control" value={this.state.fillfile.input}></textarea>
+                                          </div>
+
+                                          <div style={{ flex: "1", marginLeft: "2%" }}>
+
+                                            <h4 style={{ color: "GrayText" }}>Output:</h4>
+                                            <textarea rows="7" class="form-control" value={sanitize(this.state.fillfile.output, {allowedTags:[] ,allowedAttributes:{}})} 
+                                            ></textarea>
+
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    </form>
+                                  </div>
+
+                                </Modal>
+                              </tr>
+                          )
+                        }
+                      </tbody>
+
+                      
+                    </table>
+
+
+                  </div>
+                </div>
+              </div>
+
+
             </div>
 
-            <div>
-              {
-                (this.state != undefined) ?
-                  <CsvToHtmlTable
-                    data={this.state.myData}
-                    csvDelimiter=","
-                    tableClassName="table table-responsive table-bordered table-hover table-striped table-sm"
-
-                  />
-                  : null
-              }
-
-
-            </div>
           </div>
 
-
-
-
-
-          <div class="profile-info col-6" style={{ marginLeft: "0px" }}>
-            <div class="card mb-7">
-              <p>Text Uploads</p>
-            </div>
-            <div>
-              {
-                (this.state != undefined) ?
-                  <CsvToHtmlTable
-                    data={this.state.newData}
-                    csvDelimiter=","
-                    tableClassName="table table-responsive table-bordered table-hover table-striped table-sm"
-
-                  />
-                  : null
-              }
-
-
-            </div>
-          </div>
-
-          {/* <div class="col-lg-4">
-        <div class="card mb-4">
-        <p class="mb-4"><span class="text-primary font-italic me-1"></span> History
-                  </p>
-                  
-               
-        </div> 
-            </div> */}
-
-
-        </div>
-
+        </section>
       </div>
 
 
