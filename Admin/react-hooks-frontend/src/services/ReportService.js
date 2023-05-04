@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const REPORT_BASE_REST_API_URL = 'http://localhost:8080/api/v1/reports';
+const REPORT_BASE_REST_API_URL = 'http://localhost:8081/api/v1/reports';
 
 class ReportService{
 

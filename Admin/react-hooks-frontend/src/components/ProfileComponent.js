@@ -5,9 +5,6 @@ import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-
-
-
 import UserService from '../services/UserService'
 
 const ProfileComponent = () => {
@@ -29,15 +26,7 @@ const ProfileComponent = () => {
         })
     }
 
-    const deleteUser = (userId) => {
-        UserService.deleteUser(userId).then((response) => {
-            getAllUsers();
 
-        }).catch(error => {
-            console.log(error);
-        })
-
-    }
 
     return (
 

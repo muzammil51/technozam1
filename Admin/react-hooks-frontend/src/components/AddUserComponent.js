@@ -7,13 +7,13 @@ const AddUserComponent = () => {
     const [email, setEmail] = useState('')
     const [email_verified, setEmailVerified] = useState('')
 
+
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
 
     const [imageUrl, setImageUrl] = useState('')
-    const [provider, setProvider] = useState('')
+    const [provider, setProvider] = useState('local')
     const [providerId, setProviderId] = useState('')
-
 
     const history = useHistory();
     const { id } = useParams();
@@ -53,7 +53,7 @@ const AddUserComponent = () => {
             setName(response.data.name)
             setPassword(response.data.password)
             setImageUrl(response.data.imageUrl)
-            setProvider(response.data.provider)
+            setProvider("local")
             setProviderId(response.data.providerId)
 
         }).catch(error => {
@@ -139,8 +139,9 @@ const AddUserComponent = () => {
                                         placeholder="Provider"
                                         name="provider"
                                         className="form-control"
-                                        value={provider}
-                                        onChange={(e) => setProvider(e.target.value)}
+                                        value="local"
+                                        onChange={(e) => setProvider("local")}
+                                        disabled
                                     >
                                     </input>
 

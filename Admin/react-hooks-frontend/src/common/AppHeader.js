@@ -47,7 +47,7 @@ class AppHeader extends Component {
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                   <li class="dropdown-header">
                     You have 4 new notifications
-                    <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                    <a href="/allreports"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                   </li>
                   <li>
                     <hr class="dropdown-divider" />
@@ -106,7 +106,7 @@ class AppHeader extends Component {
                     <hr class="dropdown-divider" />
                   </li>
                   <li class="dropdown-footer">
-                    <a href="#">Show all notifications</a>
+                    <a href="/allreports">Show all notifications</a>
                   </li>
 
                 </ul>
@@ -123,14 +123,14 @@ class AppHeader extends Component {
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                   <li class="dropdown-header">
                     You have 2 new messages
-                    <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                    <a href="/allcontacts"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                   </li>
                   <li>
                     <hr class="dropdown-divider" />
                   </li>
 
                   <li class="message-item">
-                    <a href="#" style={{ textDecoration: "none" }}>
+                    <a href="/view-contact/1" style={{ textDecoration: "none" }}>
                       <img src={require('../img/girl.jpg')} alt="" class="rounded-circle" />
                       <div>
                         <h4>Huda Sarfaraz</h4>
@@ -144,7 +144,7 @@ class AppHeader extends Component {
                   </li>
 
                   <li class="message-item">
-                    <a href="#" style={{ textDecoration: "none" }}>
+                    <a href="/view-contact/2" style={{ textDecoration: "none" }}>
                       <img src={require('../img/boy.png')} alt="" class="rounded-circle" />
                       <div>
                         <h4>Muzi</h4>
@@ -160,7 +160,7 @@ class AppHeader extends Component {
                   </li>
 
                   <li class="dropdown-footer">
-                    <a href="#">Show all messages</a>
+                    <a href="/allcontacts">Show all messages</a>
                   </li>
 
                 </ul>
@@ -272,6 +272,21 @@ class AppHeader extends Component {
                 <span>Add new User</span>
               </a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link collapsed" href="/allreports">
+                <i class="bi bi-question-circle"></i>
+                <span>Report Problems</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link collapsed" href="/allcontacts">
+                <i class="bi bi-question-circle"></i>
+                <span>User Messages</span>
+              </a>
+            </li>
+
             {/* <!-- End F.A.Q Page Nav --> */}
 
             <li class="nav-item">
