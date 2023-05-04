@@ -273,14 +273,20 @@ newfilecloseModal() {
                   <div class="text-center text-lg-start">
                   </div>
                 </div>
+
+                <div>
+                  <iframe
+                    style={{ height: "670px", width: "1300px" }}
+                    frameBorder="0"
+                    src="https://technozam-truefalse.hf.space">
+                  </iframe>
+                </div>
+
               </div>
 
             </div>
           </div>
-          <div style={{ height: "550px", width: "1400px" }}>
-            <iframe style={{ height: "670px", width: "1370px" }} frameBorder="0" src='http://127.0.0.1:7861/'></iframe>
-            <p class="getstarted btn-get-started"><a href="http://127.0.0.1:7861/" target="myFrame">Open in Full Screen</a></p>
-          </div>
+
 
         </section>
 

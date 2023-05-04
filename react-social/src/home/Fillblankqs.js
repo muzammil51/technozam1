@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { NavLink, Link} from 'react-router-dom'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import './Home.css';
 
 class Fillblankqs extends Component {
+
+  componentDidMount() {
+    AOS.init();
+}
+
     render() {
         return (
           

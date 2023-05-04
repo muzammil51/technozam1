@@ -275,13 +275,18 @@ class Fillblankqsnew extends Component {
                   <p>We offer you to generate Fill-in-Blanks questions based on text using AI technology. You just have to add your content and questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
 
                 </div>
+
+                <div>
+                  <iframe
+                    style={{ height: "670px", width: "1300px" }}
+                    frameBorder="0"
+                    src="https://technozam-fillinblanks.hf.space">
+                  </iframe>
+                </div>
+
               </div>
 
             </div>
-          </div>
-          <div style={{ height: "550px", width: "1400px" }}>
-            <iframe style={{ height: "670px", width: "1370px", }} frameBorder="0" src='http://127.0.0.1:7860'></iframe>
-            <p class="getstarted btn-get-started"><a href="http://127.0.0.1:7860" target="myFrame">Open in Full Screen</a></p>
           </div>
 
         </section>
@@ -294,11 +299,11 @@ class Fillblankqsnew extends Component {
               <p>Recent Uploads History</p>
             </header>
 
-            <div class="row gy-4" style={{marginLeft:"80px"}} data-aos="fade-left">
+            <div class="row gy-4" style={{ marginLeft: "80px" }} data-aos="fade-left">
 
-{/* Text Recent History */}
+              {/* Text Recent History */}
 
-            <div data-aos="zoom-out" data-aos-delay="100">
+              <div data-aos="zoom-out" data-aos-delay="100">
                 <div class="box">
 
                   <div>
@@ -307,7 +312,7 @@ class Fillblankqsnew extends Component {
                         <h2>Recent Text Upload History</h2>
                       </header>
 
-                      <table style={{height:"300px"}} className="table table-borderless table-hover table-responsive">
+                      <table style={{ height: "300px" }} className="table table-borderless table-hover table-responsive">
 
                         <thead class="thead-dark">
                           <tr>
@@ -325,7 +330,7 @@ class Fillblankqsnew extends Component {
                                   <td> {filltext.id} </td>
                                   <td> {filltext.subject} </td>
                                   <td> {filltext.timedate} </td>
-                                  <button style={{ margin: "10px" ,color:"white" }} onClick={() => this.viewText(filltext.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More</button>
+                                  <button style={{ margin: "10px", color: "white" }} onClick={() => this.viewText(filltext.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More</button>
 
                                   <Modal
                                     isOpen={this.state.newtextmodalIsOpen}
@@ -364,7 +369,7 @@ class Fillblankqsnew extends Component {
                                             <div style={{ flex: "1", marginLeft: "2%" }}>
 
                                               <h4 style={{ color: "GrayText" }}>Output:</h4>
-                                              <textarea rows="7" class="form-control" value={sanitize(this.state.filltext.output, {allowedTags:[] ,allowedAttributes:{}})} ></textarea>
+                                              <textarea rows="7" class="form-control" value={sanitize(this.state.filltext.output, { allowedTags: [], allowedAttributes: {} })} ></textarea>
 
                                             </div>
                                           </div>
@@ -384,15 +389,15 @@ class Fillblankqsnew extends Component {
                 </div>
               </div>
 
-{/* File Recent History  */}
+              {/* File Recent History  */}
 
-              <div class="col-lg-6" style={{marginLeft:"40px"}} data-aos="zoom-in" data-aos-delay="100">
+              <div class="col-lg-6" style={{ marginLeft: "40px" }} data-aos="zoom-in" data-aos-delay="100">
                 <div class="box">
                   <div style={{ marginLeft: "10px" }}>
                     <header class="section-header">
                       <h2>Recent File Upload History</h2>
-                    </header>                      
-                    <table style={{height:"300px"}} className="table table-borderless table-hover table-responsive">
+                    </header>
+                    <table style={{ height: "300px" }} className="table table-borderless table-hover table-responsive">
 
                       <thead class="thead-dark">
                         <tr>
@@ -410,7 +415,7 @@ class Fillblankqsnew extends Component {
                                 <td> {fillfile.id} </td>
                                 <td> {fillfile.subject} </td>
                                 <td> {fillfile.timedate} </td>
-                                <button style={{ margin: "10px" ,color:"white"}} onClick={() => this.viewFile(fillfile.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More</button>
+                                <button style={{ margin: "10px", color: "white" }} onClick={() => this.viewFile(fillfile.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More</button>
 
                                 <Modal
                                   isOpen={this.state.newfilemodalIsOpen}
@@ -449,7 +454,7 @@ class Fillblankqsnew extends Component {
                                           <div style={{ flex: "1", marginLeft: "2%" }}>
 
                                             <h4 style={{ color: "GrayText" }}>Output:</h4>
-                                            <textarea rows="7" class="form-control" value={sanitize(this.state.fillfile.output, {allowedTags:[] ,allowedAttributes:{}})} 
+                                            <textarea rows="7" class="form-control" value={sanitize(this.state.fillfile.output, { allowedTags: [], allowedAttributes: {} })}
                                             ></textarea>
 
                                           </div>
@@ -465,7 +470,7 @@ class Fillblankqsnew extends Component {
                         }
                       </tbody>
 
-                      
+
                     </table>
 
 

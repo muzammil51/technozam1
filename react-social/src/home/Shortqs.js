@@ -1,9 +1,71 @@
 import React, { Component } from 'react';
 import { NavLink, Link} from 'react-router-dom'
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+import Alert from 'react-s-alert';
+import { createContact } from '../util/APIUtils';
+
+
 import './Home.css';
 
 class Shortqs extends Component {
+
+  constructor(props) {
+    super(props);
+
+  this.state = {
+    // step 2
+    id: this.props.match.params.id,
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  };
+
+  this.changeNameHandler = this.changeNameHandler.bind(this);
+  this.changeEmailHandler = this.changeEmailHandler.bind(this);
+  this.changeSubjectHandler = this.changeSubjectHandler.bind(this);
+  this.changeMessageHandler = this.changeMessageHandler.bind(this);
+
+  this.saveOrUpdateContact = this.saveOrUpdateContact.bind(this);
+
+}
+
+saveOrUpdateContact = (e) => {
+  e.preventDefault();
+  let contactRequest = { name: this.state.name, email: this.state.email, subject: this.state.subject, message: this.state.message };
+  console.log('contact => ' + JSON.stringify(contactRequest));
+
+  // step 5
+    createContact(contactRequest).then(res => {
+      Alert.success("Your message has been sent. Thank You!");
+      this.props.history.push("/home#hero");
+    }).catch(error => {
+      Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+    });
+
+}
+
+changeNameHandler = (event) => {
+  this.setState({ name: event.target.value });
+}
+
+changeEmailHandler = (event) => {
+  this.setState({ email: event.target.value });
+}
+
+changeSubjectHandler = (event) => {
+  this.setState({ subject: event.target.value });
+}
+changeMessageHandler = (event) => { 
+  this.setState({ message: event.target.value});
+}
+
+  componentDidMount() {
+    AOS.init();
+}
     render() {
         return (
           
@@ -22,7 +84,7 @@ class Shortqs extends Component {
 
        { this.props.authenticated ? ( 
         <ul>
-         <NavLink class="getstarted btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+         <NavLink  class="getstarted btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
          Get
        </NavLink>
        </ul>
@@ -195,31 +257,27 @@ class Shortqs extends Component {
           </div>
 
           <div class="col-lg-6">
-            <form action="./contact.php" method="post" class="php-email-form">
+          <form  class="php-email-form">
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required></input>
+                <input type="text" name="name" class="form-control" placeholder="Your Name" value={this.state.name} onChange={this.changeNameHandler} required></input>
                 </div>
 
                 <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required></input>
+                <input type="email" class="form-control" name="email" placeholder="Your Email" value={this.state.email} onChange={this.changeEmailHandler} required></input>
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required></input>
+                <input type="text" class="form-control" name="subject" placeholder="Subject" value={this.state.subject} onChange={this.changeSubjectHandler} required></input>
                 </div>
 
                 <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                <textarea rows="6" class="form-control" name="message" placeholder="Message" value={this.state.message} onChange={this.changeMessageHandler} required></textarea>
                 </div>
 
                 <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
+                  <button class="php-email-form" type="submit" onClick={this.saveOrUpdateContact}>Send Message</button>
                 </div>
 
               </div>

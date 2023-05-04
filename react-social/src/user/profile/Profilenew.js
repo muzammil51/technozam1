@@ -13,7 +13,7 @@ import 'react-tabs/style/react-tabs.css';
 import { Alert } from 'bootstrap';
 
 
-class Profile extends Component {
+class Profilenew extends Component {
 
 
   handleInputFocus = (e) => {
@@ -66,6 +66,9 @@ class Profile extends Component {
                 <h2>{this.props.currentUser.name}</h2>
                 <p className="profile-email">{this.props.currentUser.email} </p>
                 <p class="text-muted">{this.props.currentUser.provider} account</p>
+
+                <p class="text-muted">Subscribed to Q-Tech</p>
+
                 <div class="d-flex justify-content-center mb-1">
                   <NavLink style={{ borderRadius: "60px" }} type="button" class="btn btn-primary" onClick={this.props.onLogout} to="/home">Logout</NavLink>
                 </div>
@@ -82,7 +85,7 @@ class Profile extends Component {
 
                   <TabList>
                     <Tab>User Overview</Tab>
-                    <Tab>Subscribe Q-Tech</Tab>
+                    {/* <Tab>Subscribe Q-Tech</Tab> */}
                     <Tab>Subscription Details</Tab>
                     <Tab>Settings</Tab>
                   </TabList>
@@ -134,7 +137,7 @@ class Profile extends Component {
                   </TabPanel>
 
                   {/* tab 2 content */}
-                  <TabPanel>
+                  {/* <TabPanel>
                     <stripe-pricing-table
                       pricing-table-id="prctbl_1MvEGPLxO487eRuBvVfUrODV"
                       publishable-key="pk_test_51Muun3LxO487eRuBnA6y0bhxn0kFaRga3MyckcDY2KsdmO7yFVxQXZwfu8qpjw2HQpp9WG7eghxbd9KMJm8X5Wum00X7tTCKEd"
@@ -142,7 +145,7 @@ class Profile extends Component {
                       client-reference-id={this.props.currentUser.id}
                     >
                     </stripe-pricing-table>
-                  </TabPanel>
+                  </TabPanel> */}
 
                   {/* tab 3 content */}
                   <TabPanel>
@@ -202,84 +205,6 @@ class Profile extends Component {
           </div>
 
         </div>
-
-
-        {/* card with changing states */}
-        {/* <div class="row">
-          <div class="col-lg-5" style={{ marginLeft: "20px" }}>
-            <div class="card">
-              <div class="card-body">
-
-                <Cards
-                  cvc={this.state.cvc}
-                  expiry={this.state.expiry}
-                  focused={this.state.focus}
-                  name={this.state.name}
-                  number={this.state.number}
-                />
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-lg-6 col-md">
-            <div class="card">
-              <h2 className='h3' style={{ textAlign: "center" }}>Card Details</h2>
-              <div class="card-body">
-                <div id="PaymentForm">
-
-                  <form>
-                    <input
-                      type="tel"
-                      name="number"
-                      maxLength={16}
-                      placeholder="Card Number"
-                      onChange={this.handleInputChange}
-                      onFocus={this.handleInputFocus}
-                      className='form-control'
-                    />
-                    <br />
-
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Name"
-                      onChange={this.handleInputChange}
-                      onFocus={this.handleInputFocus}
-                      className='form-control'
-                    />
-                    <br />
-                    <input
-                      type="tel"
-                      name="cvc"
-                      placeholder="CVC"
-                      onChange={this.handleInputChange}
-                      onFocus={this.handleInputFocus}
-                      maxLength={3}
-                      className='form-control'
-                    />
-                    <br />
-
-                    <input
-                      type="tel"
-                      name="expiry"
-                      placeholder="Valid Thru (mm/yy)"
-                      onChange={this.handleInputChange}
-                      onFocus={this.handleInputFocus}
-                      // pattern="[0-9]{2}/[0-9]{2}"
-                      maxLength={4}
-                      className='form-control'
-                    />
-                    <br />
-
-                  </form>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-        </div> */}
 
 
         {/* <!-- ======= Services Section ======= --> */}
@@ -365,6 +290,7 @@ class Profile extends Component {
   }
 }
 
-export default Profile
+export default Profilenew
+
 
 

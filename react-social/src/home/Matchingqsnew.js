@@ -273,14 +273,20 @@ class Matchingqsnew extends Component {
                   <div class="text-center text-lg-start">
                   </div>
                 </div>
+
+                <div >
+                  <iframe
+                    style={{ height: "670px", width: "1300px" }}
+                    frameBorder="0"
+                    src="https://technozam-matchings.hf.space">
+                  </iframe>
+                </div>
+
               </div>
 
             </div>
           </div>
-          <div style={{ height: "550px", width: "1400px" }}>
-            <iframe style={{ height: "670px", width: "1370px" }} frameBorder="0" src='http://127.0.0.1:7862/'></iframe>
-            <p class="getstarted btn-get-started"><a href="http://127.0.0.1:7862/" target="myFrame">Open in Full Screen</a></p>
-          </div>
+
 
         </section>
 
@@ -292,10 +298,10 @@ class Matchingqsnew extends Component {
               <p>Recent Uploads History</p>
             </header>
 
-            <div class="row gy-4" style={{marginLeft:"80px"}} data-aos="fade-left">
+            <div class="row gy-4" style={{ marginLeft: "80px" }} data-aos="fade-left">
 
-{/* Text Recent History */}
-            <div data-aos="zoom-out" data-aos-delay="100">
+              {/* Text Recent History */}
+              <div data-aos="zoom-out" data-aos-delay="100">
                 <div class="box">
 
                   <div>
@@ -304,7 +310,7 @@ class Matchingqsnew extends Component {
                         <h2>Recent Text Upload History</h2>
                       </header>
 
-                      <table style={{height:"300px"}} className="table table-borderless table-hover table-responsive">
+                      <table style={{ height: "300px" }} className="table table-borderless table-hover table-responsive">
 
                         <thead class="thead-dark">
                           <tr>
@@ -322,7 +328,7 @@ class Matchingqsnew extends Component {
                                   <td> {matchtext.id} </td>
                                   <td> {matchtext.subject} </td>
                                   <td> {matchtext.timedate} </td>
-                                  <button style={{ margin: "10px",color:"white" }} onClick={() => this.viewText(matchtext.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More</button>
+                                  <button style={{ margin: "10px", color: "white" }} onClick={() => this.viewText(matchtext.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More</button>
 
                                   <Modal
                                     isOpen={this.state.newtextmodalIsOpen}
@@ -361,7 +367,7 @@ class Matchingqsnew extends Component {
                                             <div style={{ flex: "1", marginLeft: "2%" }}>
 
                                               <h4 style={{ color: "GrayText" }}>Output:</h4>
-                                              <textarea rows="7" class="form-control" value={sanitize(this.state.matchtext.output, {allowedTags:[] ,allowedAttributes:{}})} required></textarea>
+                                              <textarea rows="7" class="form-control" value={sanitize(this.state.matchtext.output, { allowedTags: [], allowedAttributes: {} })} required></textarea>
 
                                             </div>
                                           </div>
@@ -381,14 +387,14 @@ class Matchingqsnew extends Component {
                 </div>
               </div>
 
-{/* File Recent History */}
-              <div class="col-lg-6" style={{marginLeft:"40px"}} data-aos="zoom-in" data-aos-delay="100">
+              {/* File Recent History */}
+              <div class="col-lg-6" style={{ marginLeft: "40px" }} data-aos="zoom-in" data-aos-delay="100">
                 <div class="box">
                   <div style={{ marginLeft: "10px" }}>
                     <header class="section-header">
                       <h2>Recent File Upload History</h2>
-                    </header>                      
-                    <table style={{height:"300px"}} className="table table-borderless table-hover table-responsive">
+                    </header>
+                    <table style={{ height: "300px" }} className="table table-borderless table-hover table-responsive">
 
                       <thead class="thead-dark">
                         <tr>
@@ -406,7 +412,7 @@ class Matchingqsnew extends Component {
                                 <td> {matchfile.id} </td>
                                 <td> {matchfile.subject} </td>
                                 <td> {matchfile.timedate} </td>
-                                <button style={{ margin: "10px",color:"white" }} onClick={() => this.viewFile(matchfile.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More</button>
+                                <button style={{ margin: "10px", color: "white" }} onClick={() => this.viewFile(matchfile.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More</button>
 
                                 {/* <td><a href="#" role="button" onClick={this.newopenModal}>See more</a></td> */}
 
@@ -447,7 +453,7 @@ class Matchingqsnew extends Component {
                                           <div style={{ flex: "1", marginLeft: "2%" }}>
 
                                             <h4 style={{ color: "GrayText" }}>Output:</h4>
-                                            <textarea rows="7" class="form-control" value={sanitize(this.state.matchfile.output, {allowedTags:[] ,allowedAttributes:{}})}></textarea>
+                                            <textarea rows="7" class="form-control" value={sanitize(this.state.matchfile.output, { allowedTags: [], allowedAttributes: {} })}></textarea>
 
                                           </div>
                                         </div>

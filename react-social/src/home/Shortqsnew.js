@@ -278,19 +278,22 @@ class Shortqsnew extends Component {
                 {/* <!-- Modal --> */}
 
                 <div class="content">
-
                   <h3>Short Question Generator</h3>
                   <p>We offer you to generate Short Questions based on text using AI technology. You just have to add your content and questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
                   <div class="text-center text-lg-start">
                   </div>
                 </div>
-              </div>
 
+                <div>
+                  <iframe
+                    style={{ height: "670px", width: "1300px" }}
+                    frameBorder="0"
+                    src="https://technozam-short.hf.space">
+                  </iframe>
+                </div>
+
+              </div>
             </div>
-          </div>
-          <div style={{ height: "550px", width: "1400px" }}>
-            <iframe style={{ height: "670px", width: "1370px" }} frameBorder="0" src='http://127.0.0.1:7861/'></iframe>
-            <p class="getstarted btn-get-started"><a href="http://127.0.0.1:7861/" target="myFrame">Open in Full Screen</a></p>
           </div>
 
         </section>
@@ -305,7 +308,7 @@ class Shortqsnew extends Component {
 
             <div class="row gy-4" style={{ marginLeft: "80px" }} data-aos="fade-left">
 
-{/* Text Recent History */}
+              {/* Text Recent History */}
               <div data-aos="zoom-out" data-aos-delay="100">
                 <div class="box">
 
@@ -333,7 +336,7 @@ class Shortqsnew extends Component {
                                   <td> {shorttext.id} </td>
                                   <td> {shorttext.subject} </td>
                                   <td> {shorttext.timedate} </td>
-                                  <button style={{ margin: "10px",color:"white" }} onClick={() => this.viewText(shorttext.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More </button>
+                                  <button style={{ margin: "10px", color: "white" }} onClick={() => this.viewText(shorttext.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More </button>
 
                                   {/* <td><a href="#" role="button" onClick={this.newopenModal}>See more</a></td> */}
 
@@ -374,7 +377,7 @@ class Shortqsnew extends Component {
                                             <div style={{ flex: "1", marginLeft: "2%" }}>
 
                                               <h4 style={{ color: "GrayText" }}>Output:</h4>
-                                              <textarea rows="7" class="form-control" value={sanitize(this.state.shorttext.output, {allowedTags:[] ,allowedAttributes:{}})}></textarea>
+                                              <textarea rows="7" class="form-control" value={sanitize(this.state.shorttext.output, { allowedTags: [], allowedAttributes: {} })}></textarea>
 
                                             </div>
                                           </div>
@@ -395,7 +398,7 @@ class Shortqsnew extends Component {
                 </div>
               </div>
 
-{/* File Recent History */}
+              {/* File Recent History */}
               <div class="col-lg-6" style={{ marginLeft: "40px" }} data-aos="zoom-in" data-aos-delay="100">
                 <div class="box">
                   <div style={{ marginLeft: "10px" }}>
@@ -420,7 +423,7 @@ class Shortqsnew extends Component {
                                 <td> {shortfile.id} </td>
                                 <td> {shortfile.subject} </td>
                                 <td> {shortfile.timedate} </td>
-                                <button style={{ margin: "10px",color:"white" }} onClick={() => this.viewFile(shortfile.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More </button>
+                                <button style={{ margin: "10px", color: "white" }} onClick={() => this.viewFile(shortfile.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More </button>
 
                                 <Modal
                                   isOpen={this.state.newfilemodalIsOpen}
@@ -443,7 +446,7 @@ class Shortqsnew extends Component {
                                           <b>{this.state.shortfile.subject}</b>
                                         </div>
 
-                                        <div  class="col-md-5">
+                                        <div class="col-md-5">
                                           <h4 style={{ color: "GrayText" }}>Date/Time:</h4>
                                           <h4 style={{ color: "GrayText" }}>{this.state.shortfile.timedate}  </h4>
                                         </div>
@@ -459,7 +462,7 @@ class Shortqsnew extends Component {
                                           <div style={{ flex: "1", marginLeft: "2%" }}>
 
                                             <h4 style={{ color: "GrayText" }}>Output:</h4>
-                                            <textarea rows="7" class="form-control" value={sanitize(this.state.shortfile.output, {allowedTags:[] ,allowedAttributes:{}})}></textarea>
+                                            <textarea rows="7" class="form-control" value={sanitize(this.state.shortfile.output, { allowedTags: [], allowedAttributes: {} })}></textarea>
                                           </div>
                                         </div>
 

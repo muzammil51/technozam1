@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom'
-import { createReport, getAllNotesText, getNotesTextbyId ,getAllNotesFile,getNotesFilebyId} from '../util/APIUtils';
+import { createReport, getAllNotesText, getNotesTextbyId, getAllNotesFile, getNotesFilebyId } from '../util/APIUtils';
 import Alert from 'react-s-alert';
 
 import AOS from 'aos';
@@ -22,7 +22,7 @@ const customStyles = {
     // marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     borderRadius: '30px',
-    width:'70%'
+    width: '70%'
 
   }
 };
@@ -110,7 +110,7 @@ class Notesqsnew extends Component {
     });
   }
 
-// save report problem into database
+  // save report problem into database
   saveOrUpdateProblem = (e) => {
     e.preventDefault();
     let reportRequest = { module: this.state.module, name: this.state.name, email: this.state.email, subject: this.state.subject, problem: this.state.problem };
@@ -196,7 +196,7 @@ class Notesqsnew extends Component {
     this.setState({ newtextmodalIsOpen: false });
   }
 
-  
+
   // new file modal
   newfileopenModal() {
     this.setState({ newfilemodalIsOpen: true });
@@ -284,14 +284,21 @@ class Notesqsnew extends Component {
                   <div class="text-center text-lg-start">
                   </div>
                 </div>
+
+
+                <div>
+                  <iframe
+                    style={{ height: "670px", width: "1300px" }}
+                    frameBorder="0"
+                    src="https://technozam-notes.hf.space">
+                  </iframe>
+                </div>
+
               </div>
 
             </div>
           </div>
-          <div style={{ height: "550px", width: "1400px" }}>
-            <iframe style={{ height: "670px", width: "1370px" }} frameBorder="0" src='http://127.0.0.1:7860/'></iframe>
-            <p class="getstarted btn-get-started"><a href="http://127.0.0.1:7860/" target="myFrame">Open in Full Screen</a></p>
-          </div>
+
 
         </section>
         <section id="pricing" class="pricing">
@@ -302,10 +309,10 @@ class Notesqsnew extends Component {
               <p>Recent Uploads History</p>
             </header>
 
-            <div class="row gy-4" style={{marginLeft:"80px"}} data-aos="fade-left">
+            <div class="row gy-4" style={{ marginLeft: "80px" }} data-aos="fade-left">
 
-{/* Text Recent History */}
-            <div data-aos="zoom-out" data-aos-delay="100">
+              {/* Text Recent History */}
+              <div data-aos="zoom-out" data-aos-delay="100">
                 <div class="box">
 
                   <div>
@@ -314,7 +321,7 @@ class Notesqsnew extends Component {
                         <h2>Recent Text Upload History</h2>
                       </header>
 
-                      <table style={{height:"300px"}} className="table table-borderless table-hover table-responsive">
+                      <table style={{ height: "300px" }} className="table table-borderless table-hover table-responsive">
 
                         <thead class="thead-dark">
                           <tr>
@@ -332,7 +339,7 @@ class Notesqsnew extends Component {
                                   <td> {notestext.id} </td>
                                   <td> {notestext.subject} </td>
                                   <td> {notestext.timedate} </td>
-                                  <button style={{ margin: "10px", color:"white" }} onClick={() => this.viewText(notestext.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More</button>
+                                  <button style={{ margin: "10px", color: "white" }} onClick={() => this.viewText(notestext.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More</button>
 
                                   <Modal
                                     isOpen={this.state.newtextmodalIsOpen}
@@ -371,7 +378,7 @@ class Notesqsnew extends Component {
                                             <div style={{ flex: "1", marginLeft: "2%" }}>
 
                                               <h4 style={{ color: "GrayText" }}>Output:</h4>
-                                              <textarea rows="7" class="form-control" value={sanitize(this.state.notestext.output, {allowedTags:[] ,allowedAttributes:{}})}></textarea>
+                                              <textarea rows="7" class="form-control" value={sanitize(this.state.notestext.output, { allowedTags: [], allowedAttributes: {} })}></textarea>
 
                                             </div>
                                           </div>
@@ -399,14 +406,14 @@ class Notesqsnew extends Component {
                 </div>
               </div>
 
-{/* File Recent history */}
-              <div class="col-lg-6" style={{marginLeft:"40px"}} data-aos="zoom-in" data-aos-delay="100">
+              {/* File Recent history */}
+              <div class="col-lg-6" style={{ marginLeft: "40px" }} data-aos="zoom-in" data-aos-delay="100">
                 <div class="box">
                   <div style={{ marginLeft: "10px" }}>
                     <header class="section-header">
                       <h2>Recent File Upload History</h2>
-                    </header>                      
-                    <table style={{height:"300px"}} className="table table-borderless table-hover table-responsive">
+                    </header>
+                    <table style={{ height: "300px" }} className="table table-borderless table-hover table-responsive">
 
                       <thead class="thead-dark">
                         <tr>
@@ -424,9 +431,9 @@ class Notesqsnew extends Component {
                                 <td> {notesfile.id} </td>
                                 <td> {notesfile.subject} </td>
                                 <td> {notesfile.timedate} </td>
-                                <button style={{ margin: "10px", color:"white"}} onClick={() => this.viewFile(notesfile.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More</button>
+                                <button style={{ margin: "10px", color: "white" }} onClick={() => this.viewFile(notesfile.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More</button>
 
-                               <Modal
+                                <Modal
                                   isOpen={this.state.newfilemodalIsOpen}
                                   onAfterOpen={this.newfileafterOpenModal}
                                   onRequestClose={this.newfilecloseModal}
@@ -463,7 +470,7 @@ class Notesqsnew extends Component {
                                           <div style={{ flex: "1", marginLeft: "2%" }}>
 
                                             <h4 style={{ color: "GrayText" }}>Output:</h4>
-                                            <textarea rows="7" class="form-control" value={sanitize(this.state.notesfile.output, {allowedTags:[] ,allowedAttributes:{}})}></textarea>
+                                            <textarea rows="7" class="form-control" value={sanitize(this.state.notesfile.output, { allowedTags: [], allowedAttributes: {} })}></textarea>
 
                                           </div>
                                         </div>
@@ -490,7 +497,7 @@ class Notesqsnew extends Component {
           </div>
 
         </section>
-        
+
 
       </div>
 
