@@ -51,6 +51,7 @@ class AppFooter extends Component {
 
               <div class="col-lg-2 col-4 footer-links ">
                 <h4 class="text-light">Our Services</h4>
+                
                 {this.props.authenticated ? (
                   <ul class="text-light">
                     <li><i class="bi bi-chevron"></i><a href="shortqsnew">Short Questions</a></li>

@@ -6,6 +6,8 @@ import 'aos/dist/aos.css';
 
 import Alert from 'react-s-alert';
 import { createContact } from '../util/APIUtils';
+import ScrollToTop from "react-scroll-to-top";
+
 
 
 import './Home.css';
@@ -290,6 +292,8 @@ changeMessageHandler = (event) => {
       </div>
 
     </section>
+    <ScrollToTop smooth color='white' style={{backgroundColor:"blue"}} />
+
     {/* <!-- End Contact Section --> */}
         </div>
         )

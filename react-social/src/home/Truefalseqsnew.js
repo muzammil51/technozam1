@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom'
-import { createReport, getAllTrueText, getTrueTextbyId ,getAllTrueFile,getTrueFilebyId } from '../util/APIUtils';
+import { createReport, getAllTrueText, getTrueTextbyId, getAllTrueFile, getTrueFilebyId } from '../util/APIUtils';
 import Alert from 'react-s-alert';
+import ScrollToTop from "react-scroll-to-top";
+
 
 
 import AOS from 'aos';
@@ -16,12 +18,12 @@ import './Home.css';
 
 const customStyles = {
   content: {
-    color:"blue",
-    top: '50%',
+    color: "blue",
+    top: '55%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
-    // marginRight: '-50%',
+    marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     borderRadius: '30px',
   }
@@ -32,7 +34,7 @@ class Truefalseqsnew extends Component {
   constructor(props) {
     super(props);
     console.log(props)
-    
+
     this.state = {
 
       // report problem Modal
@@ -46,19 +48,19 @@ class Truefalseqsnew extends Component {
 
       // Report problem form values
       id: this.props.match.params.id,
-      module:'True/False Module',
+      module: 'True/False Module',
       name: this.props.currentUser.name,
       email: this.props.currentUser.email,
       subject: '',
       problem: '',
 
-            // True Text Array from API
-            truetexts: [],
-            truetext: {},
-      
-            // True File array from API
-            truefiles: [],
-            truefile: {},
+      // True Text Array from API
+      truetexts: [],
+      truetext: {},
+
+      // True File array from API
+      truefiles: [],
+      truefile: {},
     };
 
     //Report Problem Modal
@@ -82,12 +84,12 @@ class Truefalseqsnew extends Component {
     this.changeSubjectHandler = this.changeSubjectHandler.bind(this);
     this.changeProblemHandler = this.changeProblemHandler.bind(this);
 
-        //Save Report Prblem
-        this.saveOrUpdateProblem = this.saveOrUpdateProblem.bind(this);
+    //Save Report Prblem
+    this.saveOrUpdateProblem = this.saveOrUpdateProblem.bind(this);
 
-        // View Text and File from database
-        this.viewText = this.viewText.bind(this);
-        this.viewFile = this.viewFile.bind(this)
+    // View Text and File from database
+    this.viewText = this.viewText.bind(this);
+    this.viewFile = this.viewFile.bind(this)
   }
 
   componentDidMount() {
@@ -106,44 +108,44 @@ class Truefalseqsnew extends Component {
     });
   }
 
-// save report problem into database
+  // save report problem into database
   saveOrUpdateProblem = (e) => {
     e.preventDefault();
-    let reportRequest = { module:this.state.module,name: this.state.name, email: this.state.email, subject: this.state.subject, problem: this.state.problem };
+    let reportRequest = { module: this.state.module, name: this.state.name, email: this.state.email, subject: this.state.subject, problem: this.state.problem };
     console.log('report => ' + JSON.stringify(reportRequest));
 
     // step 5
-      createReport(reportRequest).then(res => {
-        Alert.success("Your problem has been reported.");
-        this.setState({ modalIsOpen: false });
-      });
+    createReport(reportRequest).then(res => {
+      Alert.success("Your problem has been reported.");
+      this.setState({ modalIsOpen: false });
+    });
 
-      this.closeModal
+    this.closeModal
   }
 
-    // view each text id element
-    viewText = (id) => {
-      getTrueTextbyId(id).then(res => {
-        this.newtextopenModal
-        this.setState({
-          truetext: res,
-          newtextmodalIsOpen: true
-        });
-        console.log(res)
-      })
-    }
-  
-    // view each file id element
-    viewFile = (id) => {
-      getTrueFilebyId(id).then(res => {
-        this.newfileopenModal
-        this.setState({
-          truefile: res,
-          newfilemodalIsOpen: true
-        });
-        console.log(res)
-      })
-    }
+  // view each text id element
+  viewText = (id) => {
+    getTrueTextbyId(id).then(res => {
+      this.newtextopenModal
+      this.setState({
+        truetext: res,
+        newtextmodalIsOpen: true
+      });
+      console.log(res)
+    })
+  }
+
+  // view each file id element
+  viewFile = (id) => {
+    getTrueFilebyId(id).then(res => {
+      this.newfileopenModal
+      this.setState({
+        truefile: res,
+        newfilemodalIsOpen: true
+      });
+      console.log(res)
+    })
+  }
 
   changeNameHandler = (event) => {
     this.setState({ name: event.target.value });
@@ -172,34 +174,43 @@ class Truefalseqsnew extends Component {
   closeModal() {
     this.setState({ modalIsOpen: false });
   }
-// new text modal
-newtextopenModal() {
-  this.setState({ newtextmodalIsOpen: true });
-}
+  // new text modal
+  newtextopenModal() {
+    this.setState({ newtextmodalIsOpen: true });
+  }
 
-newtextafterOpenModal() {
-  // references are now sync'd and can be accessed.
-  this.subtitle.style.color = 'white';
-}
+  newtextafterOpenModal() {
+    // references are now sync'd and can be accessed.
+    this.subtitle.style.color = 'white';
+  }
 
-newtextcloseModal() {
-  this.setState({ newtextmodalIsOpen: false });
-}
+  newtextcloseModal() {
+    this.setState({ newtextmodalIsOpen: false });
+  }
 
 
-// new file modal
-newfileopenModal() {
-  this.setState({ newfilemodalIsOpen: true });
-}
+  // new file modal
+  newfileopenModal() {
+    this.setState({ newfilemodalIsOpen: true });
+  }
 
-newfileafterOpenModal() {
-  // references are now sync'd and can be accessed.
-  this.subtitle.style.color = 'white';
-}
+  newfileafterOpenModal() {
+    // references are now sync'd and can be accessed.
+    this.subtitle.style.color = 'white';
+  }
 
-newfilecloseModal() {
-  this.setState({ newfilemodalIsOpen: false });
-}
+  newfilecloseModal() {
+    this.setState({ newfilemodalIsOpen: false });
+  }
+
+  downloadTxtFile = () => {
+    const element = document.createElement("a");
+    const file = new Blob([document.getElementById('myInput').value]);
+    element.href = URL.createObjectURL(file);
+    element.download = ([document.getElementById('myTitle').value]);
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  }
 
   render() {
     return (
@@ -231,8 +242,8 @@ newfilecloseModal() {
                   <div class="modal-body">
                     <form>
                       <div class="row gy-6">
-                        
-                      <div class="col-md-5">
+
+                        <div class="col-md-5">
                           <input type="text" name="module" class="form-control" placeholder="Module" value={"True/False Module"} disabled></input>
                         </div>
                         <br /><br /><br />
@@ -243,7 +254,7 @@ newfilecloseModal() {
                         <br /><br /><br />
 
                         <div class="col-md-6 ">
-                          <input type="email" class="form-control" name="email" placeholder="Your Email" value={this.props.currentUser.email} onChange={this.changeEmailHandler}  disabled></input>
+                          <input type="email" class="form-control" name="email" placeholder="Your Email" value={this.props.currentUser.email} onChange={this.changeEmailHandler} disabled></input>
                         </div>
                         <br /><br /><br />
 
@@ -270,21 +281,22 @@ newfilecloseModal() {
                 <div class="content">
                   <h3>True/False Question Generator</h3>
                   <p>We offer you to generate True/False questions based on text using AI technology. You just have to add your content and questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
-                  <div class="text-center text-lg-start">
-                  </div>
-                </div>
+                  <a type="button" class="btn btn-link" href='tutorial' style={{ color: 'blue', float: "right" }}>View Tutorial</a>
 
-                <div>
-                  <iframe
-                    style={{ height: "670px", width: "1300px" }}
-                    frameBorder="0"
-                    src="https://technozam-truefalse.hf.space">
-                  </iframe>
                 </div>
-
               </div>
 
             </div>
+          </div>
+
+
+          <div>
+            <iframe
+              class="container-fluid"
+              style={{ height: "670px" }}
+              frameBorder="0"
+              src="https://technozam-truefalse.hf.space/?__theme=light">
+            </iframe>
           </div>
 
 
@@ -298,10 +310,10 @@ newfilecloseModal() {
               <p>Recent Uploads History</p>
             </header>
 
-            <div class="row gy-4" style={{marginLeft:"80px"}} data-aos="fade-left">
+            <div class="row gy-4" data-aos="fade-left">
 
-{/* Text Recent History */}
-            <div data-aos="zoom-out" data-aos-delay="100">
+              {/* Text Recent History */}
+              <div className='col-lg-6' data-aos="zoom-out" data-aos-delay="100">
                 <div class="box">
 
                   <div>
@@ -310,7 +322,7 @@ newfilecloseModal() {
                         <h2>Recent Text Upload History</h2>
                       </header>
 
-                      <table style={{height:"300px"}} className="table table-borderless table-hover table-responsive">
+                      <table style={{ height: "300px" }} className="table table-borderless table-hover table-responsive">
 
                         <thead class="thead-dark">
                           <tr>
@@ -328,8 +340,8 @@ newfilecloseModal() {
                                   <td> {truetext.id} </td>
                                   <td> {truetext.subject} </td>
                                   <td> {truetext.timedate} </td>
-                              
-                                  <button style={{ margin: "10px",color:"white"  }} onClick={() => this.viewText(truetext.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More </button>
+
+                                  <button style={{ margin: "10px", color: "white" }} onClick={() => this.viewText(truetext.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More </button>
 
                                   {/* <td><a href="#" role="button" onClick={this.newopenModal}>See more</a></td> */}
 
@@ -339,25 +351,18 @@ newfilecloseModal() {
                                     onRequestClose={this.newtextcloseModal}
                                     style={customStyles}
                                   >
-                                    <div class="modal-header">
-                                      <h4 class="h4 modal-title">Report a Problem</h4>
-                                      <button class="close" onClick={this.newtextcloseModal}>&times;</button>
-                                    </div>
-
 
                                     <div class="modal-body">
+                                      <button class="close" onClick={this.newtextcloseModal}>&times;</button>
+
                                       <form>
                                         <div class="row gy-6">
 
-                                          <div class="col-md-5">
-                                            <h4 style={{ color: "GrayText" }}>Subject:  </h4>
-                                            <b>{this.state.truetext.subject}</b>
+                                          <div>
+                                            <h4 style={{ color: "GrayText" }}>Subject:  <b style={{ color: "blue", marginLeft: "5px" }}>{this.state.truetext.subject}</b></h4>
+                                            <p style={{ color: "GrayText" }}>Date/Time: {this.state.truetext.timedate}</p>
                                           </div>
 
-                                          <div class="col-md-5">
-                                            <h4 style={{ color: "GrayText" }}>Date/Time:</h4>
-                                            <h4 style={{ color: "GrayText" }}>{this.state.truetext.timedate}  </h4>
-                                          </div>
                                           <br /><br />
 
                                           <div style={{ width: "100%", display: "flex" }}>
@@ -368,9 +373,11 @@ newfilecloseModal() {
                                             </div>
 
                                             <div style={{ flex: "1", marginLeft: "2%" }}>
-
-                                              <h4 style={{ color: "GrayText" }}>Output:</h4>
-                                              <textarea rows="7" class="form-control" value={sanitize(this.state.truetext.output, {allowedTags:[] ,allowedAttributes:{}})}></textarea>
+                                              <h4 style={{ color: "GrayText" }}>Output: <span><button style={{ color: "white" }} type="button" class="badge rounded-pill bg-info float-right" onClick={this.downloadTxtFile}>Save to file</button></span></h4>
+                                              {/* defaultValue={sanitize(this.state.shorttext.output, { allowedTags: ["br"], allowedAttributes: {} }).split("<br />").map(place => <p> {place} </p>)} */}
+                                              <div contentEditable="true" class="form-control overflow-auto" style={{ height: "325px" }}><p>{sanitize(this.state.truetext.output, { allowedTags: ["br"], allowedAttributes: {} }).split("<br />").map(place => <p> {place} </p>)} </p></div>
+                                              <input type='hidden' id="myInput" defaultValue={sanitize(this.state.truetext.output, { allowedTags: [], allowedAttributes: {} })} />
+                                              <input type='hidden' id="myTitle" defaultValue={this.state.truetext.subject} />
 
                                             </div>
                                           </div>
@@ -391,14 +398,14 @@ newfilecloseModal() {
                 </div>
               </div>
 
-{/* File Recent History */}
-              <div class="col-lg-6" style={{marginLeft:"40px"}} data-aos="zoom-in" data-aos-delay="100">
+              {/* File Recent History */}
+              <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
                 <div class="box">
                   <div style={{ marginLeft: "10px" }}>
                     <header class="section-header">
                       <h2>Recent File Upload History</h2>
-                    </header>                      
-                    <table style={{height:"300px"}} className="table table-borderless table-hover table-responsive">
+                    </header>
+                    <table style={{ height: "300px" }} className="table table-borderless table-hover table-responsive">
 
                       <thead class="thead-dark">
                         <tr>
@@ -416,7 +423,7 @@ newfilecloseModal() {
                                 <td> {truefile.id} </td>
                                 <td> {truefile.subject} </td>
                                 <td> {truefile.timedate} </td>
-                                <button style={{ margin: "10px",color:"white" }} onClick={() => this.viewFile(truefile.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More </button>
+                                <button style={{ margin: "10px", color: "white" }} onClick={() => this.viewFile(truefile.id)} className="badge rounded-pill bg-primary"><i class="bi bi-plus-lg"></i>View More </button>
 
                                 {/* <td><a href="#" role="button" onClick={this.newopenModal}>See more</a></td> */}
 
@@ -426,25 +433,18 @@ newfilecloseModal() {
                                   onRequestClose={this.newfilecloseModal}
                                   style={customStyles}
                                 >
-                                  <div class="modal-header">
-                                    <h4 class="h4 modal-title">Report a Problem</h4>
-                                    <button class="close" onClick={this.newfilecloseModal}>&times;</button>
-                                  </div>
-
 
                                   <div class="modal-body">
+                                    <button class="close" onClick={this.newfilecloseModal}>&times;</button>
+
                                     <form>
-                                      <div class="row gy-6">
+                                      <div class="row gy-7">
 
-                                        <div class="col-md-5">
-                                          <h4 style={{ color: "GrayText" }}>Subject:  </h4>
-                                          <b>{this.state.truefile.subject}</b>
+                                        <div>
+                                          <h4 style={{ color: "GrayText" }}>Subject:  <b style={{ color: "blue", marginLeft: "5px" }}>{this.state.truefile.subject}</b></h4>
+                                          <p style={{ color: "GrayText" }}>Date/Time: {this.state.truefile.timedate}</p>
                                         </div>
 
-                                        <div class="col-md-5">
-                                          <h4 style={{ color: "GrayText" }}>Date/Time:</h4>
-                                          <h4 style={{ color: "GrayText" }}>{this.state.truefile.timedate}  </h4>
-                                        </div>
                                         <br /><br />
 
                                         <div style={{ width: "100%", display: "flex" }}>
@@ -455,9 +455,11 @@ newfilecloseModal() {
                                           </div>
 
                                           <div style={{ flex: "1", marginLeft: "2%" }}>
-
-                                            <h4 style={{ color: "GrayText" }}>Output:</h4>
-                                            <textarea rows="7" class="form-control" value={this.state.truefile.output} ></textarea>
+                                            <h4 style={{ color: "GrayText" }}>Output: <span><button style={{ color: "white" }} type="button" class="badge rounded-pill bg-info float-right" onClick={this.downloadTxtFile}>Save to file</button></span></h4>
+                                            {/* defaultValue={sanitize(this.state.shorttext.output, { allowedTags: ["br"], allowedAttributes: {} }).split("<br />").map(place => <p> {place} </p>)} */}
+                                            <div contentEditable="true" class="form-control overflow-auto" style={{ height: "325px" }}><p>{sanitize(this.state.truefile.output, { allowedTags: ["br"], allowedAttributes: {} }).split("<br />").map(place => <p> {place} </p>)} </p></div>
+                                            <input type='hidden' id="myInput" defaultValue={sanitize(this.state.truefile.output, { allowedTags: [], allowedAttributes: {} })} />
+                                            <input type='hidden' id="myTitle" defaultValue={this.state.truefile.subject} />
 
                                           </div>
                                         </div>
@@ -484,6 +486,8 @@ newfilecloseModal() {
           </div>
 
         </section>
+        <ScrollToTop smooth color='white' style={{ backgroundColor: "blue" }} />
+
 
 
       </div>

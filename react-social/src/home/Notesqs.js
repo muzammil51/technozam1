@@ -3,6 +3,8 @@ import { NavLink, Link} from 'react-router-dom'
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import ScrollToTop from "react-scroll-to-top";
+
 
 import './Home.css';
 
@@ -239,6 +241,8 @@ class Notesqs extends Component {
       </div>
 
     </section>
+    <ScrollToTop smooth color='white' style={{backgroundColor:"blue"}} />
+
     {/* <!-- End Contact Section --> */}
         </div>
         )

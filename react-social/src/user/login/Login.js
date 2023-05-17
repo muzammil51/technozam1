@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Login.css';
 import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL, ACCESS_TOKEN } from '../../constants';
-import { login } from '../../util/APIUtils';
+import { getCurrentUser, login } from '../../util/APIUtils';
 import { Link, Redirect } from 'react-router-dom'
 import fbLogo from '../../img/fb-logo.png';
 import googleLogo from '../../img/google-logo.png';
@@ -23,14 +23,17 @@ class Login extends Component {
                 });
             }, 100);
         }
+        this.setState
     }
     
     render() {
         if(this.props.authenticated) {
+            
             return <Redirect
                 to={{
                 pathname: "/",
                 state: { from: this.props.location}
+                
             }}/>;            
         }
 
@@ -46,7 +49,8 @@ class Login extends Component {
                 <div className="login-content col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                     <h1 className="login-title">Good To See You! <h2>Login to continue.</h2> </h1>
 
-                    
+                    <p className='h8'>Login with:</p>
+
                     <SocialLogin />
                     <div className="or-separator">
                         <span className="or-text">OR</span>
@@ -60,16 +64,18 @@ class Login extends Component {
 }
 
 class SocialLogin extends Component {
+    
     render() {
         return (
-            <div className="social-login">
-                <a className="btn btn-block social-btn google" href={GOOGLE_AUTH_URL}>
-                    <img src={googleLogo} alt="Google" /> Log in with Google</a>
-                <a className="btn btn-block social-btn facebook" href={FACEBOOK_AUTH_URL}>
-                    <img src={fbLogo} alt="Facebook" /> Log in with Facebook</a>
-                <a className="btn btn-block social-btn github" href={GITHUB_AUTH_URL}>
-                    <img src={githubLogo} alt="Github" /> Log in with Github</a>
+            <div>
+                <a className="google" href={GOOGLE_AUTH_URL} >
+                    <img src={googleLogo} style={{height:"75px", marginRight:"50px"}} alt="Google" /></a>
+                <a className="facebook" href={FACEBOOK_AUTH_URL}>
+                    <img src={fbLogo} style={{height:"60px",marginRight:"50px"}} alt="Facebook" /> </a>
+                <a className="github" href={GITHUB_AUTH_URL}>
+                    <img src={githubLogo} style={{height:"60px"}} alt="Github" /></a>
             </div>
+            
         );
     }
 }
@@ -80,7 +86,7 @@ class LoginForm extends Component {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -105,7 +111,10 @@ class LoginForm extends Component {
         .then(response => {
             localStorage.setItem(ACCESS_TOKEN, response.accessToken);
             Alert.success("You're successfully logged in!");
-            this.props.history.push("/");
+
+            // this.props.history.push("/");
+            window.location.reload("/");
+
         }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });
@@ -121,8 +130,9 @@ class LoginForm extends Component {
                 </div>
                 <div className="form-item">
                     <input type="password" name="password" 
-                        className="form-control" placeholder="Password"
-                        value={this.state.password} onChange={this.handleInputChange} required/>
+                        className="form-control" placeholder="Password (must be 8 characters long)"
+                        value={this.state.password} onChange={this.handleInputChange} 
+                        pattern="(?=.*).{8,}" required/>
                 </div>
                 <div className="form-item">
                     <button type="submit" className="btn btn-block btn-primary">Login</button>

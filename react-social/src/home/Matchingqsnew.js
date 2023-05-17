@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom'
 import { createReport, getAllMatchText, getMatchTextbyId, getAllMatchFile, getMatchFilebyId } from '../util/APIUtils';
 import Alert from 'react-s-alert';
+import ScrollToTop from "react-scroll-to-top";
+
+
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -13,11 +16,11 @@ import sanitize from 'sanitize-html';
 const customStyles = {
   content: {
     color: "blue",
-    top: '50%',
+    top: '55%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
-    // marginRight: '-50%',
+    marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     borderRadius: '30px',
   }
@@ -200,6 +203,15 @@ class Matchingqsnew extends Component {
     this.setState({ newfilemodalIsOpen: false });
   }
 
+  downloadTxtFile = () => {
+    const element = document.createElement("a");
+    const file = new Blob([document.getElementById('myInput').value]);
+    element.href = URL.createObjectURL(file);
+    element.download = ([document.getElementById('myTitle').value]);
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  }
+
 
   render() {
     return (
@@ -270,21 +282,21 @@ class Matchingqsnew extends Component {
                 <div class="content">
                   <h3>Matching Question Generator</h3>
                   <p>We offer you to generate Matching Questions based on text using AI technology. You just have to add your content and questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
-                  <div class="text-center text-lg-start">
-                  </div>
-                </div>
-
-                <div >
-                  <iframe
-                    style={{ height: "670px", width: "1300px" }}
-                    frameBorder="0"
-                    src="https://technozam-matchings.hf.space">
-                  </iframe>
+                  <a type="button" class="btn btn-link" href='tutorial' style={{ color: 'blue', float: "right" }}>View Tutorial</a>
                 </div>
 
               </div>
 
             </div>
+          </div>
+
+          <div>
+            <iframe
+              class="container-fluid"
+              style={{ height: "670px" }}
+              frameBorder="0"
+              src="https://technozam-matchings.hf.space/?__theme=light">
+            </iframe>
           </div>
 
 
@@ -298,10 +310,10 @@ class Matchingqsnew extends Component {
               <p>Recent Uploads History</p>
             </header>
 
-            <div class="row gy-4" style={{ marginLeft: "80px" }} data-aos="fade-left">
+            <div class="row gy-4" data-aos="fade-left">
 
               {/* Text Recent History */}
-              <div data-aos="zoom-out" data-aos-delay="100">
+              <div className='col-lg-6' data-aos="zoom-out" data-aos-delay="100">
                 <div class="box">
 
                   <div>
@@ -336,24 +348,16 @@ class Matchingqsnew extends Component {
                                     onRequestClose={this.newtextcloseModal}
                                     style={customStyles}
                                   >
-                                    <div class="modal-header">
-                                      <h4 class="h4 modal-title">Report a Problem</h4>
-                                      <button class="close" onClick={this.newtextcloseModal}>&times;</button>
-                                    </div>
-
 
                                     <div class="modal-body">
+                                      <button class="close" onClick={this.newtextcloseModal}>&times;</button>
+
                                       <form>
-                                        <div class="row gy-6">
+                                        <div class="row gy-7">
 
-                                          <div class="col-md-5">
-                                            <h4 style={{ color: "GrayText" }}>Subject:  </h4>
-                                            <b>{this.state.matchtext.subject}</b>
-                                          </div>
-
-                                          <div class="col-md-5">
-                                            <h4 style={{ color: "GrayText" }}>Date/Time:</h4>
-                                            <h4 style={{ color: "GrayText" }}>{this.state.matchtext.timedate}  </h4>
+                                          <div>
+                                            <h4 style={{ color: "GrayText" }}>Subject:  <b style={{ color: "blue", marginLeft: "5px" }}>{this.state.matchtext.subject}</b></h4>
+                                            <p style={{ color: "GrayText" }}>Date/Time: {this.state.matchtext.timedate}</p>
                                           </div>
                                           <br /><br />
 
@@ -365,9 +369,11 @@ class Matchingqsnew extends Component {
                                             </div>
 
                                             <div style={{ flex: "1", marginLeft: "2%" }}>
-
-                                              <h4 style={{ color: "GrayText" }}>Output:</h4>
-                                              <textarea rows="7" class="form-control" value={sanitize(this.state.matchtext.output, { allowedTags: [], allowedAttributes: {} })} required></textarea>
+                                              <h4 style={{ color: "GrayText" }}>Output: <span><button style={{ color: "white" }} type="button" class="badge rounded-pill bg-info float-right" onClick={this.downloadTxtFile}>Save to file</button></span></h4>
+                                              {/* defaultValue={sanitize(this.state.shorttext.output, { allowedTags: ["br"], allowedAttributes: {} }).split("<br />").map(place => <p> {place} </p>)} */}
+                                              <div contentEditable="true" class="form-control overflow-auto" style={{ height: "325px" }}><p>{sanitize(this.state.matchtext.output, { allowedTags: ["br"], allowedAttributes: {} }).split("<br />").map(place => <p> {place} </p>)} </p></div>
+                                              <input type='hidden' id="myInput" defaultValue={sanitize(this.state.matchtext.output, { allowedTags: [], allowedAttributes: {} })} />
+                                              <input type='hidden' id="myTitle" defaultValue={this.state.matchtext.subject} />
 
                                             </div>
                                           </div>
@@ -388,7 +394,7 @@ class Matchingqsnew extends Component {
               </div>
 
               {/* File Recent History */}
-              <div class="col-lg-6" style={{ marginLeft: "40px" }} data-aos="zoom-in" data-aos-delay="100">
+              <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
                 <div class="box">
                   <div style={{ marginLeft: "10px" }}>
                     <header class="section-header">
@@ -422,24 +428,16 @@ class Matchingqsnew extends Component {
                                   onRequestClose={this.newfilecloseModal}
                                   style={customStyles}
                                 >
-                                  <div class="modal-header">
-                                    <h4 class="h4 modal-title">Report a Problem</h4>
-                                    <button class="close" onClick={this.newfilecloseModal}>&times;</button>
-                                  </div>
-
 
                                   <div class="modal-body">
+                                    <button class="close" onClick={this.newfilecloseModal}>&times;</button>
+
                                     <form>
-                                      <div class="row gy-6">
+                                      <div class="row gy-7">
 
-                                        <div class="col-md-5">
-                                          <h4 style={{ color: "GrayText" }}>Subject:  </h4>
-                                          <b>{this.state.matchfile.subject}</b>
-                                        </div>
-
-                                        <div class="col-md-5">
-                                          <h4 style={{ color: "GrayText" }}>Date/Time:</h4>
-                                          <h4 style={{ color: "GrayText" }}>{this.state.matchfile.timedate}  </h4>
+                                        <div>
+                                          <h4 style={{ color: "GrayText" }}>Subject:  <b style={{ color: "blue", marginLeft: "5px" }}>{this.state.matchfile.subject}</b></h4>
+                                          <p style={{ color: "GrayText" }}>Date/Time: {this.state.matchfile.timedate}</p>
                                         </div>
                                         <br /><br />
 
@@ -451,9 +449,11 @@ class Matchingqsnew extends Component {
                                           </div>
 
                                           <div style={{ flex: "1", marginLeft: "2%" }}>
-
-                                            <h4 style={{ color: "GrayText" }}>Output:</h4>
-                                            <textarea rows="7" class="form-control" value={sanitize(this.state.matchfile.output, { allowedTags: [], allowedAttributes: {} })}></textarea>
+                                            <h4 style={{ color: "GrayText" }}>Output: <span><button style={{ color: "white" }} type="button" class="badge rounded-pill bg-info float-right" onClick={this.downloadTxtFile}>Save to file</button></span></h4>
+                                            {/* defaultValue={sanitize(this.state.shorttext.output, { allowedTags: ["br"], allowedAttributes: {} }).split("<br />").map(place => <p> {place} </p>)} */}
+                                            <div contentEditable="true" class="form-control overflow-auto" style={{ height: "325px" }}><p>{sanitize(this.state.matchfile.output, { allowedTags: ["br"], allowedAttributes: {} }).split("<br />").map(place => <p> {place} </p>)} </p></div>
+                                            <input type='hidden' id="myInput" defaultValue={sanitize(this.state.matchfile.output, { allowedTags: [], allowedAttributes: {} })} />
+                                            <input type='hidden' id="myTitle" defaultValue={this.state.matchfile.subject} />
 
                                           </div>
                                         </div>
@@ -477,6 +477,8 @@ class Matchingqsnew extends Component {
           </div>
 
         </section>
+        <ScrollToTop smooth color='white' style={{ backgroundColor: "blue" }} />
+
       </div>
     )
   }

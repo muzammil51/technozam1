@@ -6,7 +6,7 @@ import { Drawer } from '@atul15r/react-drawer';
 
 
 class AppHeader extends Component {
-
+  
   constructor() {
     super();
     this.state = {
@@ -21,8 +21,14 @@ class AppHeader extends Component {
   onClose() {
     this.setState({ show: false });
   }
+  componentDidMount(){
+        this.props.handleLogin();
+
+  }
 
   render() {
+
+
     return (
       <header id='header' className="app-header fixed-top" style={{ background: 'white', boxShadow: "0px 2px 20px rgba(1, 5, 12, 0.1)" }}>
 
@@ -48,10 +54,12 @@ class AppHeader extends Component {
                 <li><a class="nav-link scrollto" href="notesqsnew">Notes</a></li>
 
                 <li class="dropdown"> <a><img style={{ borderRadius: 500, width: 40, height: 40, marginRight: 7 }} src={this.props.currentUser.imageUrl}></img>{this.props.currentUser.name}</a>
-                  <ul style={{ float: 'right' }}>
-                    <span><img style={{ borderRadius: 500, width: 40, height: 40, marginRight: 6 }} src={this.props.currentUser.imageUrl}></img><h2 style={{ display: 'inline' }}>{this.props.currentUser.name}</h2></span>
-                    <span><h3 style={{ marginLeft: 46, fontSize: 14 }}>{this.props.currentUser.email}</h3></span>
-                    {/* <span><h3 style={{marginLeft:46,fontSize:14}}>{this.props.currentUser.provider}</h3></span> */}
+                  
+                  <ul style={{float: 'left', width:"100%", paddingLeft:"15px",marginRight:"50px"}}>
+                    
+                    <span><img style={{ borderRadius: 500, width: 40, height: 40, marginRight: 12 }} src={this.props.currentUser.imageUrl}></img>
+                    <h2 style={{  }}>{this.props.currentUser.name}</h2></span>
+                    <h3 style={{fontSize: 14}}>{this.props.currentUser.email}</h3>
 
                     <li><NavLink to="/profile">Profile</NavLink></li>
                     <li><NavLink to="/home" onClick={this.props.onLogout}>Logout</NavLink></li>
@@ -94,10 +102,12 @@ class AppHeader extends Component {
             {this.props.authenticated ? (
               // change the links when user login (when user is logged in)
               <i class="bi bi-list mobile-nav-toggle" onClick={this.onToggle} >
+                
                 <Drawer
                   show={this.state.show}
                   onClose={this.onClose}
-                  drawerStyle={{backgroundColor:"#C8DACF"}}
+                  drawerStyle={{ backgroundColor: "white" }}
+                  width={300}
                 >
 
                   <a href="/home#hero" class="list-group-item list-group-item-action">
@@ -108,71 +118,65 @@ class AppHeader extends Component {
                   </a>
 
                   <a>
-                    <h3 class='h2'>Services we provide</h3>
+                    <b><h3 class='h4' style={{ fontWeight: 'bold', marginTop: '8px',textDecoration:"underline" }}>Services we provide</h3></b>
                   </a>
 
-                  <div>
-                    <a style={{ margin: "5px", }} onMouseOver={{ backgroundColor: "blue" }} href="shortqsnew">
-                      <div class="d-flex w-100 justify-content-between">
-                        <h3 class="h5 mb-1">Short Question</h3>
-                      </div>
-                    </a>
 
-                    <a style={{ margin: "5px" }} href="mcqsqsnew" >
-                      <div class="d-flex w-100 justify-content-between">
-                        <h3 class="h5 mb-1">Multiple Choice Question</h3>
-                      </div>
-                    </a>
+                  <a style={{ marginLeft: "15px" }} href="shortqsnew">
+                    <h3 class="h5">Short Question</h3>
+                  </a>
+
+                  <a style={{ marginLeft: "15px" }} href="mcqsqsnew" >
+                    <h3 class="h5">Multiple Choice Question</h3>
+                  </a>
 
 
-                    <a style={{ margin: "5px" }} href="fillblankqsnew" >
-                      <div class="d-flex w-100 justify-content-between">
-                        <h3 class="h5 mb-1">Fill-in-Blanks</h3>
-                      </div>
-                    </a>
+                  <a style={{ marginLeft: "15px" }} href="fillblankqsnew" >
+                    <h3 class="h5">Fill-in-Blanks</h3>
+                  </a>
 
-                    <a style={{ margin: "5px" }} href="truefalseqsnew" >
-                      <div class="d-flex w-100 justify-content-between">
-                        <h3 class="h5 mb-1">True/False</h3>
-                      </div>
-                    </a>
+                  <a style={{ marginLeft: "15px" }} href="truefalseqsnew" >
+                      <h3 class="h5">True/False</h3>
+                  </a>
 
-                    <a style={{ margin: "5px" }} href="matchingqsnew" >
-                      <div class="d-flex w-100 justify-content-between">
-                        <h3 class="h5 mb-1">Matchings</h3>
-                      </div>
-                    </a>
+                  <a style={{ marginLeft: "15px" }} href="matchingqsnew" >
+                      <h3 class="h5">Matchings</h3>
+                  </a>
 
-                    <a style={{ margin: "5px" }} href="notesqsnew" >
-                      <div >
-                        <h3 class="h5 mb-1">Notes</h3>
-                      </div>
-                    </a>
-                  </div>
+                  <a style={{ marginLeft: "15px" }} href="notesqsnew" >
+                      <h3 class="h5">Notes</h3>
+                  </a>
+
 
                   <div style={{ height: "30px" }} class="d-flex w-100 justify-content-between">
                   </div>
 
 
-                  <div style={{ padding:"15px", backgroundColor: "#A0BFAC", height: "150px" }}>
-                    <img style={{ borderRadius: 500, height: 40, marginRight: 7 }} src={this.props.currentUser.imageUrl}></img>{this.props.currentUser.name}
-                    <span><h3 style={{ marginLeft: 40, fontSize: 14 }}>{this.props.currentUser.email}</h3></span>
-                    <NavLink to="/profile">Profile</NavLink>
-                    <NavLink to="/home" onClick={this.props.onLogout}>Logout</NavLink>
+                  <div style={{ padding: "15px", backgroundColor: "#012970", height: "150px" }}>
+                    <img style={{ borderRadius: 500, height: 40, marginRight: 7,}} src={this.props.currentUser.imageUrl}></img> <span style={{fontSize:22,marginLeft:2,color:"whitesmoke"}}>{this.props.currentUser.name}</span>
+                    <span style={{ marginLeft: 55, fontSize: 15, color:"grey"}}> {this.props.currentUser.email}</span>
+                    <div style={{height:"20px"}}></div>
+
+                    <NavLink class="btn btn-link" to="/profile" style={{fontSize:"15px",color:"white", backgroundColor:"transparent"}}>Profile</NavLink>
+                    <NavLink class="btn btn-link" to="/home" onClick={this.props.onLogout} style={{fontSize:"15px",color:"white", backgroundColor:"transparent"}}>Logout</NavLink>
                   </div>
 
                 </Drawer>
+                
               </i>
             ) : (
               // change the links when user login (when user is not logged in)
               <i class="bi bi-list mobile-nav-toggle" onClick={this.onToggle} >
+                
                 <Drawer
                   show={this.state.show}
                   onClose={this.onClose}
-                  drawerStyle={{backgroundColor:"#C8DACF"}}
+                  drawerStyle={{ backgroundColor: "white" }}
+                  width={300}
                 >
 
-                     <a href="/home#hero" class="list-group-item list-group-item-action">
+              
+                  <a href="/home#hero" class="list-group-item list-group-item-action">
                     <img src={require("../img/logo1.png")} style={{ height: "50px" }} alt=""></img>
                     <h3 class='h2'>Q-TECH</h3>
                     <span >
@@ -180,63 +184,48 @@ class AppHeader extends Component {
                   </a>
 
                   <a>
-                    <h3 class='h2'>Services we provide</h3>
+                    <b><h3 class='h4' style={{ fontWeight: 'bold', marginTop: '20px' }}>Services we provide</h3></b>
                   </a>
 
-                  <div>
-                    <a style={{ margin: "5px", }} onMouseOver={{ backgroundColor: "blue" }} href="shortqs">
-                      <div class="d-flex w-100 justify-content-between">
-                        <h3 class="h5 mb-1">Short Question</h3>
-                      </div>
-                    </a>
 
-                    <a style={{ margin: "5px" }} href="mcqsqs" >
-                      <div class="d-flex w-100 justify-content-between">
-                        <h3 class="h5 mb-1">Multiple Choice Question</h3>
-                      </div>
-                    </a>
+                  <a style={{ marginLeft: "15px" }} href="shortqs">
+                    <h3 class="h5">Short Question</h3>
+                  </a>
+
+                  <a style={{ marginLeft: "15px" }} href="mcqsqs" >
+                    <h3 class="h5">Multiple Choice Question</h3>
+                  </a>
 
 
-                    <a style={{ margin: "5px",backgroundColor:"black"}} href="fillblankqs">
-                      <div class="d-flex w-100 justify-content-between">
-                        <h3 class="h5 mb-1">Fill-in-Blanks</h3>
-                      </div>
-                    </a>
+                  <a style={{ marginLeft: "15px" }} href="fillblankqs" >
+                    <h3 class="h5">Fill-in-Blanks</h3>
+                  </a>
 
-                    <a style={{ margin: "5px" }} href="truefalseqs" >
-                      <div class="li d-flex w-100 justify-content-between">
-                        <h3 class="h5 mb-1">True/False</h3>
-                      </div>
-                    </a>
+                  <a style={{ marginLeft: "15px" }} href="truefalseqs" >
+                      <h3 class="h5">True/False</h3>
+                  </a>
 
-                    <a style={{ margin: "5px" }} href="matchingqs" >
-                      <div class="d-flex w-100 justify-content-between">
-                        <h3 class="h5 mb-1">Matchings</h3>
-                      </div>
-                    </a>
+                  <a style={{ marginLeft: "15px" }} href="matchingqs" >
+                      <h3 class="h5">Matchings</h3>
+                  </a>
 
-                    <a style={{ margin: "5px" }} href="notesqs" >
-                      <div >
-                        <h3 class="h5 mb-1">Notes</h3>
-                      </div>
-                    </a>
-                  </div>
+                  <a style={{ marginLeft: "15px" }} href="notesqs" >
+                      <h3 class="h5">Notes</h3>
+                  </a>
+
 
                   <div style={{ height: "30px" }} class="d-flex w-100 justify-content-between">
                   </div>
-             
 
 
-                  <div style={{ padding:"15px", backgroundColor: "#A0BFAC", height: "150px" }}>
-                  <a>
-                    <h3 class='h3'>Login to proceed</h3>
-                  </a>
-                    <a style={{ height: "45px", width: "170px" }} href='/login' class="getstarted btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-                    Get Started
-                  </a>
+                  <div style={{ padding: "15px", backgroundColor: "#012970", height: "155px" }}>
+                    <a>
+                      <h3 class='h3' style={{fontSize:25,color:"whitesmoke"}}>Login to proceed</h3>
+                    </a>
+                    <a style={{ height: "40px", width: "150px" }} href='/login' class="getstarted btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                      Get Started
+                    </a>
                   </div>
-
-
 
                 </Drawer>
               </i>

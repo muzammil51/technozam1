@@ -7,6 +7,7 @@ import Alert from 'react-s-alert';
 
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './Home.css';
+import ScrollToTop from "react-scroll-to-top";
 
 
 class Home extends Component {
@@ -63,6 +64,7 @@ changeMessageHandler = (event) => {
 }
 
   componentDidMount() {
+    // this.props.handleLogin();
     AOS.init();
 }
     render() {
@@ -83,7 +85,7 @@ changeMessageHandler = (event) => {
 
        { this.props.authenticated ? ( 
         <ul>
-         <NavLink to="/profile" class="getstarted btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+         <NavLink  to="/profile" class="getstarted btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
          Get
        </NavLink>
        </ul>
@@ -398,7 +400,9 @@ changeMessageHandler = (event) => {
     {/* <!-- End Services Section --> */}
 
     {/* <!-- ======= Pricing Section ======= --> */}
-    <section id="pricing" class="pricing">
+
+    
+    {/* <section id="pricing" class="pricing">
 
       <div class="container" data-aos="fade-up">
 
@@ -447,7 +451,7 @@ changeMessageHandler = (event) => {
 
       </div>
 
-    </section>
+    </section> */}
     {/* <!-- End Pricing Section --> */}
 
 
@@ -596,6 +600,9 @@ changeMessageHandler = (event) => {
       </div>
 
     </section>
+
+    <ScrollToTop smooth color='white' style={{backgroundColor:"blue"}} />
+
     {/* <!-- End Contact Section --> */}
         </div>
         )

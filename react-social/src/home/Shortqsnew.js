@@ -10,21 +10,25 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 import sanitize from 'sanitize-html';
+import ScrollToTop from "react-scroll-to-top";
 
 import './Home.css';
+
 
 const customStyles = {
   content: {
     color: "blue",
-    top: '50%',
+    top: '55%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
-    // marginRight: '-50%',
+    marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     borderRadius: '30px',
   }
 };
+
+
 
 class Shortqsnew extends Component {
 
@@ -33,7 +37,10 @@ class Shortqsnew extends Component {
     super(props);
     console.log(props)
 
+
+
     this.state = {
+
       // report problem Modal
       modalIsOpen: false,
 
@@ -60,7 +67,6 @@ class Shortqsnew extends Component {
       shortfile: {},
 
     };
-
 
     //Report Problem Modal
     this.openModal = this.openModal.bind(this);
@@ -132,6 +138,7 @@ class Shortqsnew extends Component {
         newtextmodalIsOpen: true
       });
       console.log(res)
+      console.log(this.shorttext.output)
     })
   }
 
@@ -166,6 +173,14 @@ class Shortqsnew extends Component {
   changeProblemHandler = (event) => {
     this.setState({ problem: event.target.value });
   }
+
+  changeHand = (event) => {
+    this.setState({
+      output: this.state.shorttext.output,
+      output: event.target.value
+    });
+  }
+
 
 
   openModal() {
@@ -210,6 +225,14 @@ class Shortqsnew extends Component {
     this.setState({ newfilemodalIsOpen: false });
   }
 
+  downloadTxtFile = () => {
+    const element = document.createElement("a");
+    const file = new Blob([document.getElementById('myInput').value]);
+    element.href = URL.createObjectURL(file);
+    element.download = ([document.getElementById('myTitle').value]);
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  }
 
   render() {
     return (
@@ -280,20 +303,22 @@ class Shortqsnew extends Component {
                 <div class="content">
                   <h3>Short Question Generator</h3>
                   <p>We offer you to generate Short Questions based on text using AI technology. You just have to add your content and questions will be generated within seconds. Our goal is to generate efficient and accurate results to save your time & effort.</p>
-                  <div class="text-center text-lg-start">
-                  </div>
+                  <a type="button" class="btn btn-link" href='tutorial' style={{ color: 'blue', float: "right" }}>View Tutorial</a>
+
                 </div>
 
-                <div>
-                  <iframe
-                    style={{ height: "670px", width: "1300px" }}
-                    frameBorder="0"
-                    src="https://technozam-short.hf.space">
-                  </iframe>
-                </div>
+
 
               </div>
             </div>
+          </div>
+
+          <div>
+            <iframe class="container-fluid"
+              style={{ height: "670px" }}
+              frameBorder="0"
+              src="https://technozam-short.hf.space/?__theme=light">
+            </iframe>
           </div>
 
         </section>
@@ -306,10 +331,10 @@ class Shortqsnew extends Component {
               <p>Recent Uploads History</p>
             </header>
 
-            <div class="row gy-4" style={{ marginLeft: "80px" }} data-aos="fade-left">
+            <div class="row gy-4" style={{ left: "auto" }} data-aos="fade-left">
 
               {/* Text Recent History */}
-              <div data-aos="zoom-out" data-aos-delay="100">
+              <div className='col-lg-6' data-aos="zoom-out" data-aos-delay="100">
                 <div class="box">
 
                   <div>
@@ -346,28 +371,24 @@ class Shortqsnew extends Component {
                                     onRequestClose={this.newtextcloseModal}
                                     style={customStyles}
                                   >
-                                    <div class="modal-header">
-                                      <h4 class="h4 modal-title">Report a Problem</h4>
-                                      <button class="close" onClick={this.newtextcloseModal}>&times;</button>
-                                    </div>
-
 
                                     <div class="modal-body">
+                                      <button class="close" onClick={this.newtextcloseModal}>&times;</button>
+
+
                                       <form>
-                                        <div class="row gy-6">
+                                        <div class="row gy-7">
 
-                                          <div class="col-md-5">
-                                            <h4 style={{ color: "GrayText" }}>Subject:  </h4>
-                                            <b>{this.state.shorttext.subject}</b>
+                                          <div>
+                                            <h4 style={{ color: "GrayText" }}>Subject:  <b style={{ color: "blue", marginLeft: "5px" }}>{this.state.shorttext.subject}</b></h4>
+                                            <p style={{ color: "GrayText" }}>Date/Time: {this.state.shorttext.timedate}</p>
+
                                           </div>
 
-                                          <div class="col-md-5">
-                                            <h4 style={{ color: "GrayText" }}>Date/Time:</h4>
-                                            <h4 style={{ color: "GrayText" }}>{this.state.shorttext.timedate}  </h4>
-                                          </div>
                                           <br /><br />
 
                                           <div style={{ width: "100%", display: "flex" }}>
+
                                             <div style={{ width: "50%", float: "left", }}>
 
                                               <h4 style={{ color: "GrayText" }}>Input:</h4>
@@ -375,11 +396,14 @@ class Shortqsnew extends Component {
                                             </div>
 
                                             <div style={{ flex: "1", marginLeft: "2%" }}>
-
-                                              <h4 style={{ color: "GrayText" }}>Output:</h4>
-                                              <textarea rows="7" class="form-control" value={sanitize(this.state.shorttext.output, { allowedTags: [], allowedAttributes: {} })}></textarea>
+                                              <h4 style={{ color: "GrayText" }}>Output: <span><button style={{ color: "white" }} type="button" class="badge rounded-pill bg-info float-right" onClick={this.downloadTxtFile}>Save to file</button></span></h4>
+                                              {/* defaultValue={sanitize(this.state.shorttext.output, { allowedTags: ["br"], allowedAttributes: {} }).split("<br />").map(place => <p> {place} </p>)} */}
+                                              <div contentEditable="true" class="form-control overflow-auto" style={{ height: "325px" }}><p>{sanitize(this.state.shorttext.output, { allowedTags: ["br"], allowedAttributes: {} }).split("<br />").map(place => <p> {place} </p>)} </p></div>
+                                              <input type='hidden' id="myInput" defaultValue={sanitize(this.state.shorttext.output, { allowedTags: [], allowedAttributes: {} })} />
+                                              <input type='hidden' id="myTitle" defaultValue={this.state.shorttext.subject} />
 
                                             </div>
+
                                           </div>
 
                                         </div>
@@ -399,9 +423,9 @@ class Shortqsnew extends Component {
               </div>
 
               {/* File Recent History */}
-              <div class="col-lg-6" style={{ marginLeft: "40px" }} data-aos="zoom-in" data-aos-delay="100">
+              <div class="col-lg-6" style={{ left: "auto" }} data-aos="zoom-in" data-aos-delay="100">
                 <div class="box">
-                  <div style={{ marginLeft: "10px" }}>
+                  <div style={{ marginLeft: "15px" }}>
                     <header class="section-header">
                       <h2>Recent File Upload History</h2>
                     </header>
@@ -431,25 +455,17 @@ class Shortqsnew extends Component {
                                   onRequestClose={this.newfilecloseModal}
                                   style={customStyles}
                                 >
-                                  <div class="modal-header">
-                                    <h4 class="h4 modal-title">Report a Problem</h4>
-                                    <button class="close" onClick={this.newfilecloseModal}>&times;</button>
-                                  </div>
-
 
                                   <div class="modal-body">
+                                    <button class="close" onClick={this.newfilecloseModal}>&times;</button>
+
                                     <form>
-                                      <div class="row gy-6">
-
-                                        <div class="col-md-5">
-                                          <h4 style={{ color: "GrayText" }}>Subject:  </h4>
-                                          <b>{this.state.shortfile.subject}</b>
+                                      <div class="row gy-7">
+                                        <div>
+                                          <h4 style={{ color: "GrayText" }}>Subject:  <b style={{ color: "blue", marginLeft: "5px" }}>{this.state.shortfile.subject}</b></h4>
+                                          <p style={{ color: "GrayText" }}>Date/Time: {this.state.shortfile.timedate}</p>
                                         </div>
 
-                                        <div class="col-md-5">
-                                          <h4 style={{ color: "GrayText" }}>Date/Time:</h4>
-                                          <h4 style={{ color: "GrayText" }}>{this.state.shortfile.timedate}  </h4>
-                                        </div>
                                         <br /><br />
 
                                         <div style={{ width: "100%", display: "flex" }}>
@@ -460,10 +476,14 @@ class Shortqsnew extends Component {
                                           </div>
 
                                           <div style={{ flex: "1", marginLeft: "2%" }}>
+                                              <h4 style={{ color: "GrayText" }}>Output: <span><button style={{ color: "white" }} type="button" class="badge rounded-pill bg-info float-right" onClick={this.downloadTxtFile}>Save to file</button></span></h4>
+                                              {/* defaultValue={sanitize(this.state.shorttext.output, { allowedTags: ["br"], allowedAttributes: {} }).split("<br />").map(place => <p> {place} </p>)} */}
+                                              <div contentEditable="true" class="form-control overflow-auto" style={{ height: "325px" }}><p>{sanitize(this.state.shortfile.output, { allowedTags: ["br"], allowedAttributes: {} }).split("<br />").map(place => <p> {place} </p>)} </p></div>
+                                              <input type='hidden' id="myInput" defaultValue={sanitize(this.state.shortfile.output, { allowedTags: [], allowedAttributes: {} })} />
+                                              <input type='hidden' id="myTitle" defaultValue={this.state.shortfile.subject} />
 
-                                            <h4 style={{ color: "GrayText" }}>Output:</h4>
-                                            <textarea rows="7" class="form-control" value={sanitize(this.state.shortfile.output, { allowedTags: [], allowedAttributes: {} })}></textarea>
-                                          </div>
+                                            </div>
+
                                         </div>
 
                                       </div>
@@ -488,6 +508,8 @@ class Shortqsnew extends Component {
           </div>
 
         </section>
+        <ScrollToTop smooth color='white' style={{ backgroundColor: "blue" }} />
+
 
 
       </div>

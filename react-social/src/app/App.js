@@ -22,6 +22,8 @@ import Truefalseqsnew from '../home/Truefalseqsnew';
 import Matchingqsnew from '../home/Matchingqsnew';
 import Notesqsnew from '../home/Notesqsnew';
 
+import Tutorialex from '../home/Tutorialex';
+
 
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
@@ -47,7 +49,7 @@ class App extends Component {
     this.state = {
       authenticated: false,
       currentUser: null,
-      loading: true
+      loading: true,
     }
 
     this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(this);
@@ -114,13 +116,16 @@ class App extends Component {
     return (
       <div className="app">
         <div className="app-top-box">
-          <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout} currentUser={this.state.currentUser} />
+          <AppHeader authenticated={this.state.authenticated}  handleLogin={this.loadCurrentlyLoggedInUser} onLogout={this.handleLogout} currentUser={this.state.currentUser} />
           <br></br>
         </div>
         <div className="app-body">
           <br></br>
           <Switch>
+          
             <Route exact path="/" component={Home}></Route>
+            {/* <Route exact path="/" render={(props) => <Home handleLogin= {this.state.currentUser} />}></Route> */}
+            {/* <Route exact path="/"  render={(props) => <Home handleLogin={this.loadCurrentlyLoggedInUser} />}></Route> */}
             <Route exact path="/home" component={Home}></Route>
 
             <Route exact path="/shortqs" component={Shortqs}></Route>
@@ -129,6 +134,8 @@ class App extends Component {
             <Route exact path="/truefalseqs" component={Truefalseqs}></Route>
             <Route exact path="/matchingqs" component={Matchingqs}></Route>
             <Route exact path="/notesqs" component={Notesqs}></Route>
+
+            <Route exact path="/tutorial" component={Tutorialex}></Route>
 
 
             <PrivateRoute path="/shortqsnew" authenticated={this.state.authenticated} onLogout={this.handleLogout} currentUser={this.state.currentUser} allUser={this.state.allUser}
@@ -151,7 +158,7 @@ class App extends Component {
 
             <PrivateRoute path="/profile" authenticated={this.state.authenticated} onLogout={this.handleLogout} currentUser={this.state.currentUser} allUser={this.state.allUser}
               component={Profile}></PrivateRoute>
-
+              
             <PrivateRoute path="/profilenew" authenticated={this.state.authenticated} onLogout={this.handleLogout} currentUser={this.state.currentUser} allUser={this.state.allUser}
               component={Profilenew}></PrivateRoute>
 

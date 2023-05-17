@@ -29,6 +29,7 @@ class Signup extends Component {
 
                 <div className="signup-content col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                     <h1 className="signup-title">Welcome To Q-Tech <h2>Signup to create an account.</h2></h1>
+
                     <SocialSignup />
                     <div className="or-separator">
                         <span className="or-text">OR</span>
@@ -46,12 +47,12 @@ class SocialSignup extends Component {
     render() {
         return (
             <div className="social-signup">
-                <a className="btn btn-block social-btn google" href={GOOGLE_AUTH_URL}>
-                    <img src={googleLogo} alt="Google" /> Sign up with Google</a>
-                <a className="btn btn-block social-btn facebook" href={FACEBOOK_AUTH_URL}>
-                    <img src={fbLogo} alt="Facebook" /> Sign up with Facebook</a>
-                <a className="btn btn-block social-btn github" href={GITHUB_AUTH_URL}>
-                    <img src={githubLogo} alt="Github" /> Sign up with Github</a>
+                <a className="google" href={GOOGLE_AUTH_URL}>
+                    <img src={googleLogo} alt="Google" style={{height:"75px", marginRight:"50px"}} /> </a>
+                <a className="facebook" href={FACEBOOK_AUTH_URL}>
+                    <img src={fbLogo} alt="Facebook" style={{height:"60px", marginRight:"50px"}}/></a>
+                <a className="github" href={GITHUB_AUTH_URL}>
+                    <img src={githubLogo} alt="Github" style={{height:"60px"}} /></a>
             </div>
         );
     }
@@ -108,13 +109,18 @@ class SignupForm extends Component {
                 </div>
                 <div className="form-item">
                     <input type="password" name="password" 
-                        className="form-control" placeholder="Password"
-                        value={this.state.password} onChange={this.handleInputChange} required/>
+                        className="form-control" placeholder="Password (must be 8 characters long )"
+                        value={this.state.password} onChange={this.handleInputChange} required
+                        pattern="(?=.*).{8,}"
+                        />
                 </div>
                 <div className="form-item">
                     <button type="submit" className="btn btn-block btn-primary" >Sign Up</button>
                 </div>
-            </form>                    
+          
+            </form>   
+
+             
 
         );
     }
