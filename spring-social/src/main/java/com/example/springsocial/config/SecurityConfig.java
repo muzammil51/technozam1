@@ -22,6 +22,12 @@ import org.springframework.security.oauth2.client.web.AuthorizationRequestReposi
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+//This code defines the security configuration for the application using
+// Spring Security. It enables web security and global method security,
+// configures the authentication manager, and sets up authorization rules.
+// It also defines custom filters for OAuth2 authentication
+// and token authentication.
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(

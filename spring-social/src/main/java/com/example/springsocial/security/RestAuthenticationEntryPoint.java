@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+// interface for handling authentication errors in a RESTful API.
+// In case of an unauthorized access attempt, it logs the error message
+// and sends an HTTP response
+// with status code 401 (unauthorized) and the localized message of the exception.
+
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     private static final Logger logger = LoggerFactory.getLogger(RestAuthenticationEntryPoint.class);

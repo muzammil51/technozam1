@@ -9,6 +9,10 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//This is a Spring @Component that implements the AuthorizationRequestRepository
+// interface. It is responsible for managing and storing the OAuth2 authorization
+// requests in HTTP cookies.
+
 @Component
 public class HttpCookieOAuth2AuthorizationRequestRepository implements AuthorizationRequestRepository<OAuth2AuthorizationRequest> {
     public static final String OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME = "oauth2_auth_request";

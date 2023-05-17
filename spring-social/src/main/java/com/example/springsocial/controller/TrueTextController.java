@@ -16,25 +16,34 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/truetexts")
+// Spring REST controller which map HTTP requests to the /truetexts endpoint.
+// getAllTruetext() retrieves all TrueText objects from the database,
+// getTruetextById() retrieves a specific TrueText object by its ID.
+
+@RestController // mark class as Spring REST controller
+@RequestMapping("/truetexts") // map HTTP requests to /truetexts endpoint
 public class TrueTextController {
 
-    @Autowired
+    @Autowired // inject TrueTextRepository dependency
     private TrueTextRepository trueTextRepository;
 
-    @PreAuthorize("hasRole('USER')")
-    @GetMapping
+    @PreAuthorize("hasRole('USER')") // require 'USER' role to access this endpoint
+    @GetMapping // map HTTP GET request to /truetexts endpoint
     public List<TrueText> getAllTruetext(){
+
+        // retrieve all TrueText objects from database
         return trueTextRepository.findAll();
     }
 
     // build get problem by id REST API
-    @PreAuthorize("hasRole('USER')")
-    @GetMapping("{id}")
+    @PreAuthorize("hasRole('USER')") // require 'USER' role to access this endpoint
+    @GetMapping("{id}") // map HTTP GET request to /truetexts/{id} endpoint
     public ResponseEntity<TrueText> getTruetextById(@PathVariable  long id){
+
+        // retrieve TrueText object from database by id
         TrueText trueText = trueTextRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundExceptionNew("True Text not exist with id:" + id));
+        // return TrueText object and HTTP status code 200 (OK)
         return ResponseEntity.ok(trueText);
     }
 

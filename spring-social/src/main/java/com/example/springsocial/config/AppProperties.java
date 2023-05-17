@@ -5,6 +5,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.ArrayList;
 import java.util.List;
 
+//This is a configuration properties class that is used to read properties
+// from the application configuration file using the prefix specified
+// in the annotation. It has two inner classes Auth and OAuth2,
+// which have their own set of properties.
+// The properties are mapped to the corresponding fields using getter and setter methods
+
 @ConfigurationProperties(prefix = "app")
 public class AppProperties {
     private final Auth auth = new Auth();

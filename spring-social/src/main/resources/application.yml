@@ -32,8 +32,8 @@ spring:
                 - email
                 - public_profile
             github:
-              clientId: d3e47fc2ddd966fa4352
-              clientSecret: 3bc0f6b8332f93076354c2a5bada2f5a05aea60d
+              clientId: d467cec5a9e0d47d431d
+              clientSecret: 95e36de39fafcaedba526942544375a8530d6153
               redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
               scope:
                 - user:email
@@ -49,7 +49,7 @@ app:
     tokenSecret: 04ca023b39512e46d0c2cf4b48d5aac61d34302994c87ed4eff225dcf3b0a218739f3897051a057f9b846a69ea2927a587044164b7bae5e1306219d50b588cb1
     tokenExpirationMsec: 864000000
   cors:
-    allowedOrigins: https://technozam.pages.dev,http://localhost:8080,http://qtech-env.eba-h5rqqnbn.ap-northeast-1.elasticbeanstalk.com
+    allowedOrigins: http://localhost:3000,https://qtech.space,https://api.qtech.space,http://localhost:8080,http://qtech-env.eba-h5rqqnbn.ap-northeast-1.elasticbeanstalk.com
 
   oauth2:
     # After successfully authenticating with the OAuth2 Provider,
@@ -57,8 +57,25 @@ app:
     # redirectUri mentioned by the client in the /oauth2/authorize request.
     # We're not using cookies because they won't work well in mobile clients.
     authorizedRedirectUris:
-      - https://technozam.pages.dev/oauth2/redirect
-      - https://technozam.pages.dev
+      - https://qtech.space/
+      - https://qtech.space/oauth2/redirect
+      - http://localhost:3000/oauth2/redirect
+      - http://localhost:3000/
+      - https://api.qtech.space
+      - https://api.qtech.space/oauth2/redirect
+
+
 
       - myandroidapp://oauth2/redirect
       - myiosapp://oauth2/redirect
+
+
+
+
+
+
+server:
+  tomcat:
+    remoteip:
+      remote-ip-header: x-forwarded-for
+      protocol-header: x-forwarded-proto

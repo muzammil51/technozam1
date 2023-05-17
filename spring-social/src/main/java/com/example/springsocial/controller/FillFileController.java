@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+// Spring REST controller which map HTTP requests to the /fillfiles endpoint.
+// getAllFillfile() retrieves all FillFile objects from the database,
+// getFillfileById() retrieves a specific FillFile object by its ID.
 @RestController
 @RequestMapping("/fillfiles")
 public class FillFileController {
@@ -23,21 +25,23 @@ public class FillFileController {
     @Autowired
     private FillFileRepository fillFileRepository;
 
-
+    // GET /fillfiles
     @PreAuthorize("hasRole('USER')")
     @GetMapping
     public List<FillFile> getAllFillfile(){
+        // retrieve all FillFile objects using the FillFileRepository interface
         return fillFileRepository.findAll();
     }
 
-
-
-    // build get problem by id REST API
+    // GET /fillfiles/{id}
     @PreAuthorize("hasRole('USER')")
     @GetMapping("{id}")
     public ResponseEntity<FillFile> getFillfileById(@PathVariable  long id){
+        // retrieve a FillFile object with the given id using the FillFileRepository interface
         FillFile fillFile = fillFileRepository.findById(id)
+                // throw a ResourceNotFoundExceptionNew if the FillFile object is not found
                 .orElseThrow(() -> new ResourceNotFoundExceptionNew("Fill file not exist with id:" + id));
+        // return a ResponseEntity with the FillFile object and HTTP status 200 OK
         return ResponseEntity.ok(fillFile);
     }
 

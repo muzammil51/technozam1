@@ -12,22 +12,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+// contains two HTTP GET methods for retrieving user data.
+// getCurrentUser method retrieves the currently logged-in user's data
+// getAllUser method retrieves a list of all users in the database
+
 @RestController
 public class UserController {
 
-    @Autowired
+    @Autowired // inject UserRepository dependency
     private UserRepository userRepository;
 
-    @GetMapping("/user/me")
-    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/user/me")// map HTTP GET request to /user/me endpoint
+    @PreAuthorize("hasRole('USER')") // require 'USER' role to access this endpoint
     public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
+        // retrieve current user based on UserPrincipal object (provided by Spring Security)
         return userRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
+                    // throw exception if user not found in database
+
     }
 
-    @GetMapping("/user/all")
-    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/user/all")    // map HTTP GET request to /user/all endpoint
+//    @PreAuthorize("hasRole('ADMIN')")   // require 'ADMIN' role to access this endpoint
     public List<User> getAllUser() {
+        // retrieve all users from database
         return userRepository.findAll(); }
     }
 

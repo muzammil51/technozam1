@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, Long> {
-    // all crud database methods
+    //  represents repository that provides all CRUD (create, read, update, delete) database methods
 }
 
 

@@ -9,6 +9,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+// This is a class that provides methods to create and validate JWT tokens for user authentication.
+// It has a constructor that takes an AppProperties object that contains configuration properties for token generation.
+// The createToken() method takes an Authentication object as input and returns a JWT token string.
+// The getUserIdFromToken() method takes a JWT token string as input and returns the user's ID.
+// The validateToken() method takes a JWT token string as input, validates it, and returns a boolean indicating whether the token is valid.
+// The class uses the Java JWT library to build and parse JWT tokens, and logs error messages if the token is invalid.
 @Service
 public class TokenProvider {
 

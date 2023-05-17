@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReportRepository extends JpaRepository<Report, Long> {
+    //  represents repository that provides all CRUD (create, read, update, delete) database methods
+
     // all crud database methods
 }
 

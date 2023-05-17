@@ -15,25 +15,34 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/truefiles")
+// Spring REST controller which map HTTP requests to the /truefiles endpoint.
+// getAllTruefile() retrieves all TrueFile objects from the database,
+// getTruefileById() retrieves a specific TrueFile object by its ID.
+
+@RestController // mark class as Spring REST controller
+@RequestMapping("/truefiles") // map HTTP requests to /truefiles endpoint
 public class TrueFileController {
 
-    @Autowired
+    @Autowired // inject TrueFileRepository dependency
     private TrueFileRepository trueFileRepository;
 
-    @PreAuthorize("hasRole('USER')")
-    @GetMapping
+    @PreAuthorize("hasRole('USER')") // require 'USER' role to access this endpoint
+    @GetMapping // map HTTP GET request to /truefiles endpoint
     public List<TrueFile> getAllTruefile(){
+
+        // retrieve all TrueFile objects from database
         return trueFileRepository.findAll();
     }
 
     // build get problem by id REST API
-    @PreAuthorize("hasRole('USER')")
-    @GetMapping("{id}")
+    @PreAuthorize("hasRole('USER')") // require 'USER' role to access this endpoint
+    @GetMapping("{id}") // map HTTP GET request to /truefiles/{id} endpoint
     public ResponseEntity<TrueFile> getTruefileById(@PathVariable  long id){
+
+        // retrieve TrueFile object from database by id
         TrueFile trueFile = trueFileRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundExceptionNew("True file not exist with id:" + id));
+        // return TrueFile object and HTTP status code 200 (OK)
         return ResponseEntity.ok(trueFile);
     }
 

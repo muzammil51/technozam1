@@ -4,7 +4,7 @@ import com.example.springsocial.config.AppProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-
+// main class to run application
 @SpringBootApplication
 @EnableConfigurationProperties(AppProperties.class)
 public class SpringSocialApplication {

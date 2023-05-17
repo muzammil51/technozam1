@@ -1,6 +1,5 @@
 package com.example.springsocial.controller;
 
-
 import com.example.springsocial.exception.ResourceNotFoundExceptionNew;
 import com.example.springsocial.model.NotesText;
 import com.example.springsocial.model.ShortText;
@@ -17,29 +16,36 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/shorttexts")
+// Spring REST controller which map HTTP requests to the /shorttexts endpoint.
+// getAllShorttext() retrieves all ShortText objects from the database,
+// getShorttextById() retrieves a specific ShortText object by its ID.
+
+@RestController // marks class as Spring REST controller
+@RequestMapping("/shorttexts") // maps HTTP requests to /shorttexts endpoint
 public class ShortTextController {
 
-    @Autowired
+    @Autowired // injects ShortTextRepository dependency
     private ShortTextRepository shortTextRepository;
 
-
-    @PreAuthorize("hasRole('USER')")
-    @GetMapping
+    @PreAuthorize("hasRole('USER')") // requires 'USER' role to access this endpoint
+    @GetMapping // maps HTTP GET request to /shorttexts endpoint
     public List<ShortText> getAllShorttext(){
+
+        // retrieves all ShortText objects from the database
         return shortTextRepository.findAll();
     }
 
-    // build get problem by id REST API
-    @PreAuthorize("hasRole('USER')")
-    @GetMapping("{id}")
+    // builds a REST API to get a ShortText object by ID
+    @PreAuthorize("hasRole('USER')") // requires 'USER' role to access this endpoint
+    @GetMapping("{id}") // maps HTTP GET request to /shorttexts/{id} endpoint
     public ResponseEntity<ShortText> getShorttextById(@PathVariable  long id){
+
+        // retrieves ShortText object from database by id
         ShortText shortText = shortTextRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundExceptionNew("Short Text not exist with id:" + id));
+        // returns ShortText object and HTTP status code 200 (OK)
         return ResponseEntity.ok(shortText);
     }
 
-
-
 }
+

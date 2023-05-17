@@ -8,6 +8,8 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+    //  represents repository that provides all CRUD (create, read, update, delete) database methods
+
 
     Optional<User> findByEmail(String email);
 
