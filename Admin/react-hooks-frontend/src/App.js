@@ -2,7 +2,7 @@ import './App.css';
 import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AppHeader from './common/AppHeader';
 // import HeaderComponent from './components/HeaderComponent';
-import ListUserComponent from './components/ListUserComponent';
+import HomeComponent from './components/HomeComponent';
 
 import AllUserComponent from './components/AllUserComponent';
 import AllReportComponent from './components/AllReportComponent';
@@ -33,8 +33,8 @@ function App() {
         <div className= "app-body" >
           <br></br>
           <Switch>
-              <Route exact path = "/" component = {ListUserComponent}></Route>
-              <Route path = "/users" component = {ListUserComponent}></Route>
+              <Route exact path = "/" component = {HomeComponent}></Route>
+              <Route path = "/users" component = {HomeComponent}></Route>
 
               <Route path = "/allusers" component = {AllUserComponent}></Route>
               <Route path = "/allreports" component = {AllReportComponent}></Route>

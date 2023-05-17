@@ -96,7 +96,7 @@ const AllReportComponent = () => {
 
                                 <td>
                                   <Link style={{ color: "red" }} class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Report" onClick={() => deleteReport(report.id)}>Delete</Link>
-                                  <Link className="bi bi-info-circle-fill" data-bs-toggle="tooltip" data-bs-placement="top" title="View Report" to={`/view-report/${report.id}`} >View Problem</Link>
+                                  <Link className="bi bi-info-circle-fill" data-bs-toggle="tooltip" data-bs-placement="top" title="View Report" to={`/view-report/${report.id}`} >View</Link>
 
                                 </td>
                               </tr>

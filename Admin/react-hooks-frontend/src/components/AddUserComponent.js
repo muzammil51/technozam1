@@ -94,7 +94,7 @@ const AddUserComponent = () => {
                                 <div className="form-group">
                                     <label className="form-label"> Email :</label>
                                     <input
-                                        type="text"
+                                        type="email"
                                         placeholder="Email"
                                         name="email"
                                         className="form-control"
@@ -122,7 +122,7 @@ const AddUserComponent = () => {
                                 <div className="form-group">
                                     <label className="form-label"> Password :</label>
                                     <input
-                                        type="text"
+                                        type="password"
                                         placeholder="Password"
                                         name="password"
                                         className="form-control"
@@ -161,7 +161,7 @@ const AddUserComponent = () => {
                                 </div> */}
                                 <br></br>
                                 <button className="btn btn-success" onClick={(e) => saveOrUpdateUser(e)} style={{ marginRight: "10px" }}>Add User</button>
-                                <Link to="/users" className="btn btn-danger" > Cancel </Link>
+                                <Link to="/allusers" className="btn btn-danger" > Cancel </Link>
                             </form>
 
                         </div>

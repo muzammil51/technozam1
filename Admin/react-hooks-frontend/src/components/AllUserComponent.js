@@ -11,7 +11,7 @@ import UserService from '../services/UserService'
 const AllUserComponent = () => {
       
     const [users, setUsers] = useState([])
-
+    const [countUser, setUserCount] = useState([])
 
     useEffect(() => {
 
@@ -22,6 +22,8 @@ const AllUserComponent = () => {
         UserService.getAllUsers().then((response) => {
             setUsers(response.data)
             console.log(response.data);
+            setUserCount(response.data.length);
+
         }).catch(error =>{
             console.log(error);
         })
@@ -87,7 +89,7 @@ const AllUserComponent = () => {
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>4</h6>
+                      <h6>{countUser}</h6>
                       <span class="text-danger small pt-1 fw-bold">2%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
                     </div>

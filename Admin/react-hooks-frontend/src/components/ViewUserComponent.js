@@ -59,7 +59,7 @@ const ListUserComponent = () => {
                             <div>Account Provider: { provider }</div>
                         </div>
                         
-                        <Link to="/users" className="btn btn-danger" > Cancel </Link>
+                        <Link to="/allusers" className="btn btn-danger" > Cancel </Link>
 
                         </div>
                     </div>

@@ -94,7 +94,7 @@ const AllContactComponent = () => {
 
                                 <td>
                                   <Link style={{ color: "red" }} class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Contact" onClick={() => deleteContact(contact.id)}>Delete</Link>
-                                  <Link className="bi bi-info-circle-fill" data-bs-toggle="tooltip" data-bs-placement="top" title="View Contact" to={`/view-contact/${contact.id}`} >View Message</Link>
+                                  <Link className="bi bi-info-circle-fill" data-bs-toggle="tooltip" data-bs-placement="top" title="View Contact" to={`/view-contact/${contact.id}`} >View</Link>
 
                                 </td>
                               </tr>
