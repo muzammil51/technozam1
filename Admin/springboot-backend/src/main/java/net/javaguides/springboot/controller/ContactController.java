@@ -29,9 +29,9 @@ public class ContactController {
     // build create problem REST API
     @PostMapping()
     public Contact createProblem(@RequestBody Contact contact) {
-
         return contactRepository.save(contact);
     }
+
 
     // build get problem by id REST API
     @GetMapping("{id}")
